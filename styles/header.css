@@ -1,0 +1,35 @@
+header{
+    background-color: var(--primary-color);
+    padding: 24px 0;
+}
+
+header nav{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+header nav section:nth-child(2){
+    display: flex;
+    gap: 20px;
+}
+
+header a{
+    color: var(--white);
+}
+
+header a:hover{
+    color: var(--secondary-color);
+}
+
+.logo{ 
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
