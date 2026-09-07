@@ -1,0 +1,174 @@
+/* ============================================================
+   formularios.css — formularios, campos y mensajes de validación
+   ============================================================ */
+
+.formulario {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  background-color: var(--blanco);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+
+.formulario--ancho {
+  max-width: 840px;
+}
+
+.formulario__cabecera {
+  background-color: var(--cal);
+  border-bottom: 1px solid var(--linea);
+  padding: var(--e4) var(--e5);
+}
+
+.formulario__cuerpo {
+  padding: var(--e5);
+  display: grid;
+  gap: var(--e4);
+}
+
+.formulario__pie {
+  padding: 0 var(--e5) var(--e5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e3);
+}
+
+.formulario__nota {
+  font-size: var(--texto-sm);
+  color: var(--tinta-media);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e2);
+}
+
+.campo > label {
+  font-weight: 600;
+  font-size: var(--texto-sm);
+}
+
+.campo__opcional {
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 0.65rem var(--e3);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-sm);
+  background-color: var(--blanco);
+  font: inherit;
+  color: var(--tinta);
+}
+
+.campo textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+  border-color: var(--tinta-suave);
+}
+
+.campo input:focus-visible,
+.campo select:focus-visible,
+.campo textarea:focus-visible {
+  border-color: var(--azul);
+}
+
+.campo input:disabled,
+.campo select:disabled {
+  background-color: var(--cal);
+  color: var(--tinta-suave);
+  cursor: not-allowed;
+}
+
+/* Estado de error controlado por JS mediante aria-invalid */
+.campo input[aria-invalid="true"],
+.campo select[aria-invalid="true"],
+.campo textarea[aria-invalid="true"] {
+  border-color: var(--alerta);
+  background-color: var(--alerta-fondo);
+}
+
+.campo__error {
+  font-size: var(--texto-sm);
+  color: var(--alerta);
+  min-height: 1.25rem;
+}
+
+.campo__ayuda {
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+}
+
+.campo__contador {
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+  text-align: right;
+}
+
+.campo__contador--tope {
+  color: var(--alerta);
+  font-weight: 700;
+}
+
+/* Rejilla de dos columnas dentro de un formulario */
+.campos-par {
+  display: grid;
+  gap: var(--e4);
+  grid-template-columns: 1fr;
+}
+
+.formulario__resultado {
+  margin: 0 var(--e5) var(--e5);
+}
+
+/* Pantallas centradas de acceso (login / registro) */
+.acceso {
+  padding-block: var(--e7);
+  background-color: var(--cal);
+}
+
+.acceso__marca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e3);
+  margin-bottom: var(--e5);
+  text-align: center;
+}
+
+.acceso__marca img {
+  width: 64px;
+  height: 64px;
+}
+
+.credenciales {
+  max-width: 560px;
+  margin: var(--e4) auto 0;
+  font-size: var(--texto-sm);
+}
+
+.credenciales table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--e2);
+}
+
+.credenciales th,
+.credenciales td {
+  text-align: left;
+  padding: var(--e2);
+  border-bottom: 1px solid var(--linea);
+}

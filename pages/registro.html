@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Regístrate en ChileGol Store para comprar y seguir tus pedidos.">
+  <title>Crear cuenta · ChileGol Store</title>
+  <link rel="icon" href="../imagenes/logo-cgs.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/header.css">
+  <link rel="stylesheet" href="../styles/footer.css">
+  <link rel="stylesheet" href="../styles/formularios.css">
+  <link rel="stylesheet" href="../styles/responsive.css">
+  <script src="../scripts/datos.js" defer></script>
+  <script src="../scripts/validaciones.js" defer></script>
+  <script src="../scripts/carrito.js" defer></script>
+  <script src="../scripts/productos.js" defer></script>
+  <script src="../scripts/principal.js" defer></script>
+</head>
+<body data-raiz="../">
+    <a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
+    <header class="cabecera">
+      <nav class="cabecera__nav" aria-label="Navegación principal">
+        <a class="marca" href="../index.html">
+          <img class="marca__icono" src="../imagenes/logo-cgs.svg" alt="" width="38" height="38">
+          <span>ChileGol Store</span>
+        </a>
+
+        <button class="menu-boton" type="button" data-menu-boton aria-expanded="false" aria-controls="menu-principal">
+          <span class="menu-boton__barras" aria-hidden="true"></span>
+          Menú
+        </button>
+
+        <ul class="menu" id="menu-principal" data-menu>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../pages/productos.html">Productos</a></li>
+          <li><a href="../pages/nosotros.html">Nosotros</a></li>
+          <li><a href="../pages/blogs.html">Blogs</a></li>
+          <li><a href="../pages/contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="acciones">
+          <a href="../pages/login.html" data-sesion-enlace>Iniciar sesión</a>
+          <a class="carrito-boton" href="../pages/carrito.html">
+            <svg class="carrito-boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6.2 6H21l-2 8H8L6.2 6ZM6.2 6 5.5 3H2v2h2l2.6 11.2A2 2 0 0 0 8.6 18H19v-2H8.9L6.2 6Z"/></svg>
+            <span>Carrito</span>
+            <span class="carrito-boton__conteo" data-carrito-conteo aria-label="productos en el carrito">0</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="contenido" class="acceso">
+      <div class="contenedor">
+        <form class="formulario formulario--ancho" data-form-registro novalidate>
+          <div class="formulario__cabecera">
+            <h1>Registro de usuario</h1>
+          </div>
+
+          <div class="formulario__cuerpo">
+            <div class="campo">
+              <label for="run">RUN</label>
+              <input id="run" name="run" type="text" maxlength="9" placeholder="19011022K" autocomplete="off" required>
+              <p class="campo__ayuda">Sin puntos ni guion, con dígito verificador. Entre 7 y 9 caracteres.</p>
+              <p class="campo__error" id="error-run" data-error-de="run" role="alert"></p>
+            </div>
+
+            <div class="campos-par">
+              <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text" maxlength="50" autocomplete="given-name" required>
+                <p class="campo__error" id="error-nombre" data-error-de="nombre" role="alert"></p>
+              </div>
+
+              <div class="campo">
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" name="apellidos" type="text" maxlength="100" autocomplete="family-name" required>
+                <p class="campo__error" id="error-apellidos" data-error-de="apellidos" role="alert"></p>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="correo">Correo</label>
+              <input id="correo" name="correo" type="email" maxlength="100" autocomplete="email" required>
+              <p class="campo__ayuda">Solo @duoc.cl, @profesor.duoc.cl y @gmail.com.</p>
+              <p class="campo__error" id="error-correo" data-error-de="correo" role="alert"></p>
+            </div>
+
+            <div class="campos-par">
+              <div class="campo">
+                <label for="clave">Contraseña</label>
+                <input id="clave" name="clave" type="password" minlength="4" maxlength="10" autocomplete="new-password" required>
+                <p class="campo__ayuda">Entre 4 y 10 caracteres.</p>
+                <p class="campo__error" id="error-clave" data-error-de="clave" role="alert"></p>
+              </div>
+
+              <div class="campo">
+                <label for="clave2">Confirmar contraseña</label>
+                <input id="clave2" name="clave2" type="password" minlength="4" maxlength="10" autocomplete="new-password" required>
+                <p class="campo__error" id="error-clave2" data-error-de="clave2" role="alert"></p>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="fechaNacimiento">Fecha de nacimiento <span class="campo__opcional">(opcional)</span></label>
+              <input id="fechaNacimiento" name="fechaNacimiento" type="date">
+              <p class="campo__error" id="error-fechaNacimiento" data-error-de="fechaNacimiento" role="alert"></p>
+            </div>
+
+            <div class="campos-par">
+              <div class="campo">
+                <label for="region">Región</label>
+                <select id="region" name="region" required></select>
+                <p class="campo__error" id="error-region" data-error-de="region" role="alert"></p>
+              </div>
+
+              <div class="campo">
+                <label for="comuna">Comuna</label>
+                <select id="comuna" name="comuna" required></select>
+                <p class="campo__error" id="error-comuna" data-error-de="comuna" role="alert"></p>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="direccion">Dirección</label>
+              <input id="direccion" name="direccion" type="text" maxlength="300" autocomplete="street-address" required>
+              <p class="campo__contador" data-contador-de="direccion"></p>
+              <p class="campo__error" id="error-direccion" data-error-de="direccion" role="alert"></p>
+            </div>
+          </div>
+
+          <p data-resultado></p>
+
+          <div class="formulario__pie">
+            <button class="boton boton--principal" type="submit">Registrar</button>
+            <a class="boton boton--secundario" href="login.html">Ya tengo cuenta</a>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer class="pie">
+      <div class="pie__grid">
+        <section>
+          <h2>ChileGol Store</h2>
+          <p>Camisetas y ropa de fútbol hechas en Chile. Enviamos a todo el país en 48 horas hábiles.</p>
+        </section>
+        <section>
+          <h2>Tienda</h2>
+          <ul class="pie__enlaces">
+            <li><a href="../pages/productos.html">Todos los productos</a></li>
+            <li><a href="../pages/carrito.html">Mi carrito</a></li>
+            <li><a href="../pages/registro.html">Crear cuenta</a></li>
+            <li><a href="../pages/contacto.html">Contacto</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Novedades por correo</h2>
+          <p>Te avisamos cuando entra una camiseta nueva. Sin spam.</p>
+          <div class="suscripcion">
+            <label class="solo-lectores" for="pie-correo">Tu correo</label>
+            <input id="pie-correo" name="pie-correo" type="email" placeholder="tucorreo@gmail.com" autocomplete="email">
+            <button class="boton boton--principal boton--pequeno" type="button">Suscribirme</button>
+          </div>
+        </section>
+      </div>
+      <p class="pie__legal">
+        &copy; <span data-anio>2026</span> ChileGol Store &middot; Proyecto académico DSY1104, Duoc UC.
+        <a href="#" data-cerrar-sesion hidden>Cerrar sesión</a>
+      </p>
+    </footer>
+</body>
+</html>

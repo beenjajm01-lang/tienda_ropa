@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ficha de producto con descripción, stock disponible y opción de añadir al carrito.">
-  <title>Detalle del producto · ChileGol Store</title>
+  <meta name="description" content="Quiénes somos, cómo confeccionamos y quién desarrolló este sitio.">
+  <title>Nosotros · ChileGol Store</title>
   <link rel="icon" href="../imagenes/logo-cgs.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles/global.css">
   <link rel="stylesheet" href="../styles/header.css">
   <link rel="stylesheet" href="../styles/footer.css">
   <link rel="stylesheet" href="../styles/calugas.css">
-  <link rel="stylesheet" href="../styles/formularios.css">
   <link rel="stylesheet" href="../styles/responsive.css">
   <script src="../scripts/datos.js" defer></script>
   <script src="../scripts/validaciones.js" defer></script>
@@ -34,8 +33,8 @@
 
         <ul class="menu" id="menu-principal" data-menu>
           <li><a href="../index.html">Inicio</a></li>
-          <li><a href="../pages/productos.html" aria-current="page">Productos</a></li>
-          <li><a href="../pages/nosotros.html">Nosotros</a></li>
+          <li><a href="../pages/productos.html">Productos</a></li>
+          <li><a href="../pages/nosotros.html" aria-current="page">Nosotros</a></li>
           <li><a href="../pages/blogs.html">Blogs</a></li>
           <li><a href="../pages/contacto.html">Contacto</a></li>
         </ul>
@@ -52,49 +51,51 @@
     </header>
 
     <main id="contenido">
-      <div class="contenedor">
-        <nav aria-label="Ruta de navegación">
-          <ol class="migas">
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><span data-miga-producto>Detalle</span></li>
-          </ol>
-        </nav>
-
-        <p class="aviso" data-anuncio hidden role="status"></p>
-
-        <article class="detalle" data-detalle>
-          <figure class="detalle__galeria">
-            <img data-campo="imagen" src="../imagenes/camiseta-cordillera.svg" alt="" width="600" height="600">
-          </figure>
-
-          <div>
-            <h1 data-campo="nombre">Producto</h1>
-            <p class="detalle__precio" data-campo="precio"></p>
-            <p class="detalle__descripcion" data-campo="descripcion"></p>
-
-            <div class="detalle__compra">
-              <div class="campo">
-                <label for="cantidad">Cantidad</label>
-                <input id="cantidad" name="cantidad" type="number" value="1" min="1" step="1" inputmode="numeric">
-              </div>
-              <button class="boton boton--principal" type="button" data-agregar-detalle>Añadir al carrito</button>
-            </div>
-
-            <dl class="detalle__ficha">
-              <div><dt>Código</dt><dd data-campo="codigo"></dd></div>
-              <div><dt>Categoría</dt><dd data-campo="categoria"></dd></div>
-              <div><dt>Disponibilidad</dt><dd data-campo="stock"></dd></div>
-            </dl>
+      <section class="seccion">
+        <div class="contenedor">
+          <h1>Nosotros</h1>
+          <div class="prosa su-20">
+            <p>
+              ChileGol Store nació en 2024 en un taller de Independencia, con una máquina
+              recta prestada y un pedido de veinte camisetas para un club de barrio.
+              Hoy despachamos a las dieciséis regiones del país y seguimos confeccionando
+              en Chile.
+            </p>
+            <p>
+              Nos interesa una cosa por sobre todas: que la prenda dure. Por eso publicamos
+              la composición de cada tela, las medidas reales en centímetros y el taller
+              donde se cosió. Si algo se descose antes del año, lo reparamos sin costo.
+            </p>
           </div>
-        </article>
+        </div>
+      </section>
 
-        <section class="seccion">
-          <h2 class="seccion__titulo">También te puede servir</h2>
-          <p class="seccion__bajada">Otras prendas de la misma categoría.</p>
-          <div class="calugas" data-relacionados></div>
-        </section>
-      </div>
+      <section class="seccion seccion--cal">
+        <div class="contenedor">
+          <h2 class="seccion__titulo">Quiénes desarrollamos este sitio</h2>
+          <p class="seccion__bajada">
+            Equipo de la asignatura Desarrollo Full Stack I (DSY1104), Duoc UC.
+          </p>
+          <div class="equipo">
+            <article>
+              <h3>Integrante 1</h3>
+              <p>Estructura HTML semántica y arquitectura de carpetas. Responsable del módulo público.</p>
+            </article>
+            <article>
+              <h3>Integrante 2</h3>
+              <p>Hojas de estilo, sistema de tokens y diseño responsivo con Flexbox y CSS Grid.</p>
+            </article>
+            <article>
+              <h3>Integrante 3</h3>
+              <p>Validaciones en JavaScript, algoritmo Módulo 11 y selects en cascada.</p>
+            </article>
+            <article>
+              <h3>Integrante 4</h3>
+              <p>Carrito de compras, persistencia en localStorage y módulo administrativo.</p>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="pie">

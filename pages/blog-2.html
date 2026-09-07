@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ficha de producto con descripción, stock disponible y opción de añadir al carrito.">
-  <title>Detalle del producto · ChileGol Store</title>
+  <meta name="description" content="Del envase PET al hilo: cómo se fabrica el poliéster reciclado de nuestras camisetas.">
+  <title>Qué significa que una tela sea reciclada · ChileGol Store</title>
   <link rel="icon" href="../imagenes/logo-cgs.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles/global.css">
   <link rel="stylesheet" href="../styles/header.css">
   <link rel="stylesheet" href="../styles/footer.css">
   <link rel="stylesheet" href="../styles/calugas.css">
-  <link rel="stylesheet" href="../styles/formularios.css">
   <link rel="stylesheet" href="../styles/responsive.css">
   <script src="../scripts/datos.js" defer></script>
   <script src="../scripts/validaciones.js" defer></script>
@@ -34,9 +33,9 @@
 
         <ul class="menu" id="menu-principal" data-menu>
           <li><a href="../index.html">Inicio</a></li>
-          <li><a href="../pages/productos.html" aria-current="page">Productos</a></li>
+          <li><a href="../pages/productos.html">Productos</a></li>
           <li><a href="../pages/nosotros.html">Nosotros</a></li>
-          <li><a href="../pages/blogs.html">Blogs</a></li>
+          <li><a href="../pages/blogs.html" aria-current="page">Blogs</a></li>
           <li><a href="../pages/contacto.html">Contacto</a></li>
         </ul>
 
@@ -56,44 +55,48 @@
         <nav aria-label="Ruta de navegación">
           <ol class="migas">
             <li><a href="../index.html">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><span data-miga-producto>Detalle</span></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li>Telas recicladas</li>
           </ol>
         </nav>
 
-        <p class="aviso" data-anuncio hidden role="status"></p>
+        <article class="articulo prosa">
+          <p class="nota__fecha">2 de septiembre de 2026</p>
+          <h1>Qué significa que una tela sea reciclada</h1>
 
-        <article class="detalle" data-detalle>
-          <figure class="detalle__galeria">
-            <img data-campo="imagen" src="../imagenes/camiseta-cordillera.svg" alt="" width="600" height="600">
+          <figure class="articulo__portada">
+            <img src="../imagenes/blog-telas.svg" alt="Rollos de tela reciclada apilados en el taller" width="640" height="360">
           </figure>
 
-          <div>
-            <h1 data-campo="nombre">Producto</h1>
-            <p class="detalle__precio" data-campo="precio"></p>
-            <p class="detalle__descripcion" data-campo="descripcion"></p>
+          <p>
+            En la etiqueta de nuestras camisetas dice «poliéster reciclado, 12 botellas
+            por prenda». Es cierto, pero el número por sí solo no dice nada sobre la
+            calidad de lo que estás comprando. Esto es lo que hay detrás.
+          </p>
 
-            <div class="detalle__compra">
-              <div class="campo">
-                <label for="cantidad">Cantidad</label>
-                <input id="cantidad" name="cantidad" type="number" value="1" min="1" step="1" inputmode="numeric">
-              </div>
-              <button class="boton boton--principal" type="button" data-agregar-detalle>Añadir al carrito</button>
-            </div>
+          <h2>Del envase al hilo</h2>
+          <p>
+            Las botellas PET se lavan, se muelen hasta obtener escamas y se funden para
+            extruir un filamento. Ese filamento se estira y se enrolla como hilo. Hasta
+            ahí el proceso es idéntico al del poliéster virgen, salvo por el origen del
+            material.
+          </p>
+          <p>
+            La diferencia real está en la limpieza previa. Si quedan restos de etiquetas
+            o tapas, el hilo sale con impurezas que se notan al teñir: aparecen manchas
+            que ninguna prenda debería tener. Por eso trabajamos con un solo proveedor
+            certificado y revisamos cada partida antes de cortar.
+          </p>
 
-            <dl class="detalle__ficha">
-              <div><dt>Código</dt><dd data-campo="codigo"></dd></div>
-              <div><dt>Categoría</dt><dd data-campo="categoria"></dd></div>
-              <div><dt>Disponibilidad</dt><dd data-campo="stock"></dd></div>
-            </dl>
-          </div>
+          <h2>Lo que el reciclaje no resuelve</h2>
+          <p>
+            Una camiseta de poliéster reciclado sigue soltando microfibras al lavarse.
+            Recomendamos lavarla con agua fría, del revés y dentro de una bolsa de malla.
+            Dura más y contamina menos.
+          </p>
+
+          <p><a class="boton boton--secundario" href="blogs.html">Volver a los blogs</a></p>
         </article>
-
-        <section class="seccion">
-          <h2 class="seccion__titulo">También te puede servir</h2>
-          <p class="seccion__bajada">Otras prendas de la misma categoría.</p>
-          <div class="calugas" data-relacionados></div>
-        </section>
       </div>
     </main>
 

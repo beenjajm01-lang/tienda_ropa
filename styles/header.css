@@ -1,35 +1,156 @@
-header{
-    background-color: var(--primary-color);
-    padding: 24px 0;
+/* ============================================================
+   header.css — cabecera, navegación principal y carrito
+   ============================================================ */
+
+.cabecera {
+  position: relative;
+  z-index: var(--z-cabecera);
+  background-color: var(--tinta);
+  color: var(--blanco);
+  border-bottom: 4px solid var(--verde-vivo);
 }
 
-header nav{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.cabecera__nav {
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding: var(--e3) var(--e4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e3);
+  justify-content: space-between;
 }
 
-header nav section:nth-child(2){
-    display: flex;
-    gap: 20px;
-}
-
-header a{
-    color: var(--white);
-}
-
-header a:hover{
-    color: var(--secondary-color);
-}
-
-.logo{ 
+.marca {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--e3);
+  color: var(--blanco);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 1.125rem;
 }
 
-.logo-img {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
+.marca:hover {
+  color: var(--verde-vivo);
+}
+
+.marca__icono {
+  width: 38px;
+  height: 38px;
+}
+
+/* Botón hamburguesa: solo visible bajo 768px (ver responsive.css) */
+.menu-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e2);
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radio);
+  color: var(--blanco);
+  font: inherit;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+}
+
+.menu-boton:hover {
+  border-color: var(--verde-vivo);
+  color: var(--verde-vivo);
+}
+
+.menu-boton__barras,
+.menu-boton__barras::before,
+.menu-boton__barras::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+  content: "";
+}
+
+.menu-boton__barras {
+  position: relative;
+}
+
+.menu-boton__barras::before { position: absolute; top: -6px; }
+.menu-boton__barras::after { position: absolute; top: 6px; }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e1);
+  width: 100%;
+  order: 3;
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menu a {
+  display: block;
+  padding: var(--e2) var(--e1);
+  color: var(--blanco);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.menu a:hover {
+  color: var(--verde-vivo);
+}
+
+/* Página actual marcada con aria-current, no con una clase extra */
+.menu a[aria-current="page"] {
+  color: var(--verde-vivo);
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: var(--e3);
+}
+
+.acciones a {
+  color: var(--blanco);
+  text-decoration: none;
+  font-size: var(--texto-sm);
+  font-weight: 600;
+}
+
+.acciones a:hover {
+  color: var(--verde-vivo);
+}
+
+.carrito-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e2);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radio);
+  padding: 0.35rem 0.7rem;
+}
+
+.carrito-boton:hover {
+  border-color: var(--verde-vivo);
+}
+
+.carrito-boton__icono {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.carrito-boton__conteo {
+  min-width: 1.4rem;
+  padding-inline: 0.35rem;
+  border-radius: 999px;
+  background-color: var(--verde-vivo);
+  color: var(--tinta);
+  font-weight: 800;
+  font-size: var(--texto-xs);
+  text-align: center;
 }

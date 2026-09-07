@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ficha de producto con descripción, stock disponible y opción de añadir al carrito.">
-  <title>Detalle del producto · ChileGol Store</title>
+  <meta name="description" content="Envíanos un mensaje. Respondemos de lunes a viernes entre 9:00 y 18:00.">
+  <title>Contacto · ChileGol Store</title>
   <link rel="icon" href="../imagenes/logo-cgs.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles/global.css">
   <link rel="stylesheet" href="../styles/header.css">
   <link rel="stylesheet" href="../styles/footer.css">
-  <link rel="stylesheet" href="../styles/calugas.css">
   <link rel="stylesheet" href="../styles/formularios.css">
   <link rel="stylesheet" href="../styles/responsive.css">
   <script src="../scripts/datos.js" defer></script>
@@ -34,10 +33,10 @@
 
         <ul class="menu" id="menu-principal" data-menu>
           <li><a href="../index.html">Inicio</a></li>
-          <li><a href="../pages/productos.html" aria-current="page">Productos</a></li>
+          <li><a href="../pages/productos.html">Productos</a></li>
           <li><a href="../pages/nosotros.html">Nosotros</a></li>
           <li><a href="../pages/blogs.html">Blogs</a></li>
-          <li><a href="../pages/contacto.html">Contacto</a></li>
+          <li><a href="../pages/contacto.html" aria-current="page">Contacto</a></li>
         </ul>
 
         <div class="acciones">
@@ -51,49 +50,47 @@
       </nav>
     </header>
 
-    <main id="contenido">
+    <main id="contenido" class="acceso">
       <div class="contenedor">
-        <nav aria-label="Ruta de navegación">
-          <ol class="migas">
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><span data-miga-producto>Detalle</span></li>
-          </ol>
-        </nav>
+        <div class="acceso__marca">
+          <img src="../imagenes/logo-cgs.svg" alt="" width="64" height="64">
+          <h1>Escríbenos</h1>
+          <p class="prosa">Respondemos de lunes a viernes, entre 9:00 y 18:00.</p>
+        </div>
 
-        <p class="aviso" data-anuncio hidden role="status"></p>
+        <form class="formulario" data-form-contacto novalidate>
+          <div class="formulario__cabecera">
+            <h2>Formulario de contacto</h2>
+          </div>
 
-        <article class="detalle" data-detalle>
-          <figure class="detalle__galeria">
-            <img data-campo="imagen" src="../imagenes/camiseta-cordillera.svg" alt="" width="600" height="600">
-          </figure>
-
-          <div>
-            <h1 data-campo="nombre">Producto</h1>
-            <p class="detalle__precio" data-campo="precio"></p>
-            <p class="detalle__descripcion" data-campo="descripcion"></p>
-
-            <div class="detalle__compra">
-              <div class="campo">
-                <label for="cantidad">Cantidad</label>
-                <input id="cantidad" name="cantidad" type="number" value="1" min="1" step="1" inputmode="numeric">
-              </div>
-              <button class="boton boton--principal" type="button" data-agregar-detalle>Añadir al carrito</button>
+          <div class="formulario__cuerpo">
+            <div class="campo">
+              <label for="nombre">Nombre completo</label>
+              <input id="nombre" name="nombre" type="text" maxlength="100" autocomplete="name" required>
+              <p class="campo__error" id="error-nombre" data-error-de="nombre" role="alert"></p>
             </div>
 
-            <dl class="detalle__ficha">
-              <div><dt>Código</dt><dd data-campo="codigo"></dd></div>
-              <div><dt>Categoría</dt><dd data-campo="categoria"></dd></div>
-              <div><dt>Disponibilidad</dt><dd data-campo="stock"></dd></div>
-            </dl>
-          </div>
-        </article>
+            <div class="campo">
+              <label for="correo">Correo</label>
+              <input id="correo" name="correo" type="email" maxlength="100" autocomplete="email" required>
+              <p class="campo__ayuda">Solo @duoc.cl, @profesor.duoc.cl y @gmail.com.</p>
+              <p class="campo__error" id="error-correo" data-error-de="correo" role="alert"></p>
+            </div>
 
-        <section class="seccion">
-          <h2 class="seccion__titulo">También te puede servir</h2>
-          <p class="seccion__bajada">Otras prendas de la misma categoría.</p>
-          <div class="calugas" data-relacionados></div>
-        </section>
+            <div class="campo">
+              <label for="comentario">Mensaje</label>
+              <textarea id="comentario" name="comentario" maxlength="500" required></textarea>
+              <p class="campo__contador" data-contador-de="comentario"></p>
+              <p class="campo__error" id="error-comentario" data-error-de="comentario" role="alert"></p>
+            </div>
+          </div>
+
+          <p data-resultado></p>
+
+          <div class="formulario__pie">
+            <button class="boton boton--principal boton--ancho" type="submit">Enviar mensaje</button>
+          </div>
+        </form>
       </div>
     </main>
 

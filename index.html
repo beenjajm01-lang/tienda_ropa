@@ -3,27 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChileGol Store</title>
+  <meta name="description" content="Tienda online de camisetas y ropa de fútbol confeccionada en Chile. Despacho a todo el país.">
+  <title>ChileGol Store · Camisetas de fútbol hechas en Chile</title>
+  <link rel="icon" href="imagenes/logo-cgs.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles/global.css">
   <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/footer.css">
+  <link rel="stylesheet" href="styles/calugas.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+  <script src="scripts/datos.js" defer></script>
+  <script src="scripts/validaciones.js" defer></script>
+  <script src="scripts/carrito.js" defer></script>
+  <script src="scripts/productos.js" defer></script>
+  <script src="scripts/principal.js" defer></script>
 </head>
-<body>
-    <header>
-        <nav>
-            <section class="logo">
-                <img src="imagenes/iconocgs.webp" alt="Logo de la tienda" class="logo-img">
-                <h1>ChileGol Store</h1>
-            </section>
-            <section>
-                <a href="#">Inicio</a>
-                <a href="#">Nosotros</a>
-                <a href="#">Contacto</a>
-                <a href="pages/productos.html">Productos</a>
-            </section>
-            <section>
-                <a href="#">iniciar sesión</a>
-            </section>
-        </nav>
+<body data-raiz="">
+    <a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
+    <header class="cabecera">
+      <nav class="cabecera__nav" aria-label="Navegación principal">
+        <a class="marca" href="index.html">
+          <img class="marca__icono" src="imagenes/logo-cgs.svg" alt="" width="38" height="38">
+          <span>ChileGol Store</span>
+        </a>
+
+        <button class="menu-boton" type="button" data-menu-boton aria-expanded="false" aria-controls="menu-principal">
+          <span class="menu-boton__barras" aria-hidden="true"></span>
+          Menú
+        </button>
+
+        <ul class="menu" id="menu-principal" data-menu>
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="pages/productos.html">Productos</a></li>
+          <li><a href="pages/nosotros.html">Nosotros</a></li>
+          <li><a href="pages/blogs.html">Blogs</a></li>
+          <li><a href="pages/contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="acciones">
+          <a href="pages/login.html" data-sesion-enlace>Iniciar sesión</a>
+          <a class="carrito-boton" href="pages/carrito.html">
+            <svg class="carrito-boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6.2 6H21l-2 8H8L6.2 6ZM6.2 6 5.5 3H2v2h2l2.6 11.2A2 2 0 0 0 8.6 18H19v-2H8.9L6.2 6Z"/></svg>
+            <span>Carrito</span>
+            <span class="carrito-boton__conteo" data-carrito-conteo aria-label="productos en el carrito">0</span>
+          </a>
+        </div>
+      </nav>
     </header>
+
+    <main id="contenido">
+      <section class="hero">
+        <div class="hero__grid">
+          <div>
+            <h1 class="hero__titulo">Camisetas que aguantan los noventa minutos</h1>
+            <p class="hero__texto">
+              Diseñamos y confeccionamos en Chile. Telas recicladas, costuras planas
+              y tallas reales, para la cancha y para la tribuna.
+            </p>
+            <a class="boton boton--principal" href="pages/productos.html">Ver productos</a>
+          </div>
+          <figure class="hero__figura">
+            <img src="imagenes/hero-tienda.svg" alt="Camisetas de la temporada colgadas en la tienda" width="800" height="560">
+          </figure>
+        </div>
+      </section>
+
+      <section class="seccion">
+        <div class="contenedor">
+          <h2 class="seccion__titulo">Lo más pedido esta semana</h2>
+          <p class="seccion__bajada">Cuatro modelos que se repiten en cada pedido. Todos con despacho a regiones.</p>
+          <p class="aviso" data-anuncio hidden></p>
+          <div class="calugas" data-destacados></div>
+        </div>
+      </section>
+
+      <section class="seccion seccion--cal">
+        <div class="contenedor">
+          <h2 class="seccion__titulo">Cómo trabajamos</h2>
+          <div class="equipo">
+            <article>
+              <h3>Confección local</h3>
+              <p>Trabajamos con dos talleres en Santiago y Concepción. Cada prenda pasa por control de costura antes de salir.</p>
+            </article>
+            <article>
+              <h3>Tallas reales</h3>
+              <p>Publicamos las medidas en centímetros de cada modelo. Si no calza, el cambio es gratis dentro de 30 días.</p>
+            </article>
+            <article>
+              <h3>Despacho a todo Chile</h3>
+              <p>48 horas hábiles en el Gran Santiago y hasta 5 días en regiones extremas. Sobre $50.000 el envío es gratis.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="pie__grid">
+        <section>
+          <h2>ChileGol Store</h2>
+          <p>Camisetas y ropa de fútbol hechas en Chile. Enviamos a todo el país en 48 horas hábiles.</p>
+        </section>
+        <section>
+          <h2>Tienda</h2>
+          <ul class="pie__enlaces">
+            <li><a href="pages/productos.html">Todos los productos</a></li>
+            <li><a href="pages/carrito.html">Mi carrito</a></li>
+            <li><a href="pages/registro.html">Crear cuenta</a></li>
+            <li><a href="pages/contacto.html">Contacto</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Novedades por correo</h2>
+          <p>Te avisamos cuando entra una camiseta nueva. Sin spam.</p>
+          <div class="suscripcion">
+            <label class="solo-lectores" for="pie-correo">Tu correo</label>
+            <input id="pie-correo" name="pie-correo" type="email" placeholder="tucorreo@gmail.com" autocomplete="email">
+            <button class="boton boton--principal boton--pequeno" type="button">Suscribirme</button>
+          </div>
+        </section>
+      </div>
+      <p class="pie__legal">
+        &copy; <span data-anio>2026</span> ChileGol Store &middot; Proyecto académico DSY1104, Duoc UC.
+        <a href="#" data-cerrar-sesion hidden>Cerrar sesión</a>
+      </p>
+    </footer>
 </body>
 </html>

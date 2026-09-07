@@ -1,0 +1,7 @@
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Variables de entorno
+.env
