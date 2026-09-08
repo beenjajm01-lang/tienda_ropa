@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel de administración de ChileGol Store.">
+  <title>Usuarios · Panel ChileGol</title>
+  <link rel="icon" href="../images/logo-cgs.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../styles/styles.css">
+  <script src="../scripts/datos.js" defer></script>
+  <script src="../scripts/validaciones.js" defer></script>
+  <script src="../scripts/carrito.js" defer></script>
+  <script src="../scripts/productos.js" defer></script>
+  <script src="../scripts/principal.js" defer></script>
+  <script src="../scripts/admin.js" defer></script>
+</head>
+<body data-raiz="../" class="es-admin">
+  <a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
+  <div class="panel">
+    <aside class="lateral">
+      <a class="lateral__marca" href="../index.html">
+        <img src="../images/logo-cgs.svg" alt="" width="32" height="32">
+        <span>ChileGol admin</span>
+      </a>
+      <nav aria-label="Módulos de administración">
+        <ul class="lateral__menu">
+            <li><a href="admin-home.html">Resumen</a></li>
+            <li data-requiere="productos"><a href="admin-productos.html">Productos</a></li>
+            <li data-requiere="ordenes"><a href="admin-ordenes.html">Órdenes</a></li>
+            <li data-requiere="usuarios"><a href="admin-usuarios.html" aria-current="page">Usuarios</a></li>
+        </ul>
+      </nav>
+      <div class="lateral__sesion">
+        <p><span data-sesion-nombre>Invitado</span></p>
+        <p><span class="lateral__rol" data-sesion-rol>—</span></p>
+        <a href="../index.html">Ver la tienda</a>
+        <a href="#" data-salir>Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="trabajo" id="contenido">
+      <div class="trabajo__cabecera">
+        <h1>Usuarios</h1>
+        <a class="boton boton--principal" href="admin-nuevo-usuario.html">Nuevo usuario</a>
+      </div>
+
+      <p class="aviso" data-anuncio hidden role="status"></p>
+
+
+      <div class="tabla-envoltorio">
+        <table class="tabla">
+          <caption>Listado de usuarios del sistema</caption>
+          <thead>
+            <tr>
+              <th scope="col">RUN</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Perfil</th>
+              <th scope="col">Ubicación</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody data-tabla-usuarios></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

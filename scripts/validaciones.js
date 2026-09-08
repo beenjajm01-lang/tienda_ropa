@@ -1,31 +1,31 @@
 // validaciones.js - todas las revisiones de los formularios
 
-var DOMINIOS_PERMITIDOS = "@duoc.cl, @profesor.duoc.cl y @gmail.com";
+const DOMINIOS_PERMITIDOS = "@duoc.cl, @profesor.duoc.cl y @gmail.com";
 
 
 // ---------- revisiones basicas ----------
 
-// solo aceptamos los tres dominios que pide el enunciado
+// solo los tres dominios que pide el enunciado
 function esCorreoValido(correo) {
-  var patron = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
+  let patron = /^[a-zA-Z0-9._%+-]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/;
   return patron.test(correo);
 }
 
-// modulo 11: se recorre el cuerpo del run de derecha a izquierda
-// multiplicando por 2,3,4,5,6,7 y volviendo a empezar. Al final se resta
-// el resto a 11: si da 11 el digito es 0 y si da 10 es K
+// modulo 11: recorro el run de derecha a izquierda multiplicando por
+// 2,3,4,5,6,7 y repitiendo la serie. Despues resto el resto a 11:
+// si da 11 el digito es 0 y si da 10 es K
 function esRunValido(run) {
-  var limpio = String(run).toUpperCase();
+  let limpio = String(run).toUpperCase();
   if (!/^[0-9]{6,8}[0-9K]$/.test(limpio)) {
     return false;
   }
 
-  var cuerpo = limpio.substring(0, limpio.length - 1);
-  var verificador = limpio.charAt(limpio.length - 1);
-  var suma = 0;
-  var multiplo = 2;
+  let cuerpo = limpio.substring(0, limpio.length - 1);
+  let verificador = limpio.charAt(limpio.length - 1);
+  let suma = 0;
+  let multiplo = 2;
 
-  for (var i = cuerpo.length - 1; i >= 0; i--) {
+  for (let i = cuerpo.length - 1; i >= 0; i--) {
     suma = suma + Number(cuerpo.charAt(i)) * multiplo;
     if (multiplo === 7) {
       multiplo = 2;
@@ -34,8 +34,8 @@ function esRunValido(run) {
     }
   }
 
-  var resto = 11 - (suma % 11);
-  var esperado;
+  let resto = 11 - (suma % 11);
+  let esperado;
   if (resto === 11) {
     esperado = "0";
   } else if (resto === 10) {
@@ -50,10 +50,10 @@ function esRunValido(run) {
 
 // ---------- pintar y borrar errores ----------
 
-// devuelve false para poder escribir: return mostrarError(...)
+// devuelve false para poder hacer: return mostrarError(...)
 function mostrarError(idCampo, mensaje) {
-  var campo = document.getElementById(idCampo);
-  var zona = document.querySelector('[data-error-de="' + idCampo + '"]');
+  let campo = document.getElementById(idCampo);
+  let zona = document.querySelector('[data-error-de="' + idCampo + '"]');
   campo.setAttribute("aria-invalid", "true");
   if (zona) {
     zona.textContent = mensaje;
@@ -63,8 +63,8 @@ function mostrarError(idCampo, mensaje) {
 }
 
 function limpiarError(idCampo) {
-  var campo = document.getElementById(idCampo);
-  var zona = document.querySelector('[data-error-de="' + idCampo + '"]');
+  let campo = document.getElementById(idCampo);
+  let zona = document.querySelector('[data-error-de="' + idCampo + '"]');
   campo.setAttribute("aria-invalid", "false");
   if (zona) {
     zona.textContent = "";
@@ -73,17 +73,17 @@ function limpiarError(idCampo) {
   return true;
 }
 
-// pone el cursor en el primer campo que quedo malo
+// cursor al primer campo malo
 function enfocarPrimerError(formulario) {
-  var campo = formulario.querySelector('[aria-invalid="true"]');
+  let campo = formulario.querySelector('[aria-invalid="true"]');
   if (campo) {
     campo.focus();
   }
 }
 
-// muestra el mensaje grande de arriba del boton
+// mensaje grande del formulario
 function mostrarResultado(formulario, mensaje, esError) {
-  var zona = formulario.querySelector("[data-resultado]");
+  let zona = formulario.querySelector("[data-resultado]");
   if (!zona) {
     return;
   }
@@ -95,31 +95,9 @@ function mostrarResultado(formulario, mensaje, esError) {
   zona.textContent = mensaje;
 }
 
-// contador de caracteres que va abajo de algunos campos
-function conectarContador(idCampo, maximo) {
-  var campo = document.getElementById(idCampo);
-  var contador = document.querySelector('[data-contador-de="' + idCampo + '"]');
-  if (!campo || !contador) {
-    return;
-  }
-
-  function actualizar() {
-    contador.textContent = campo.value.length + " / " + maximo;
-    if (campo.value.length > maximo) {
-      contador.classList.add("campo__contador--tope");
-    } else {
-      contador.classList.remove("campo__contador--tope");
-    }
-  }
-
-  campo.addEventListener("input", actualizar);
-  actualizar();
-}
-
-// engancha un campo a su validacion: al salir siempre revisa, y mientras
-// escribe solo si ya estaba marcado en rojo
+// al salir del campo siempre revisa, mientras escribe solo si ya estaba en rojo
 function conectarCampo(idCampo, revisar) {
-  var campo = document.getElementById(idCampo);
+  let campo = document.getElementById(idCampo);
   if (!campo) {
     return;
   }
@@ -133,12 +111,12 @@ function conectarCampo(idCampo, revisar) {
 }
 
 
-// ---------- login ----------
+// ---------- campos que se repiten en varios formularios ----------
 
-function validarCorreoLogin() {
-  var valor = document.getElementById("correo").value.trim();
+function validarCorreo() {
+  const valor = document.getElementById("correo").value.trim();
   if (valor === "") {
-    return mostrarError("correo", "Ingresa tu correo.");
+    return mostrarError("correo", "El correo es obligatorio.");
   }
   if (valor.length > 100) {
     return mostrarError("correo", "El correo no puede superar los 100 caracteres.");
@@ -149,10 +127,10 @@ function validarCorreoLogin() {
   return limpiarError("correo");
 }
 
-function validarClaveLogin() {
-  var valor = document.getElementById("clave").value;
+function validarClave() {
+  const valor = document.getElementById("clave").value;
   if (valor === "") {
-    return mostrarError("clave", "Ingresa tu contraseña.");
+    return mostrarError("clave", "La contraseña es obligatoria.");
   }
   if (valor.length < 4 || valor.length > 10) {
     return mostrarError("clave", "La contraseña debe tener entre 4 y 10 caracteres.");
@@ -160,13 +138,11 @@ function validarClaveLogin() {
   return limpiarError("clave");
 }
 
-
-// ---------- contacto ----------
-
-function validarNombreContacto() {
-  var valor = document.getElementById("nombre").value.trim();
+// lo usan el formulario de contacto y el de producto, los dos con maximo 100
+function validarNombre() {
+  const valor = document.getElementById("nombre").value.trim();
   if (valor === "") {
-    return mostrarError("nombre", "Ingresa tu nombre.");
+    return mostrarError("nombre", "El nombre es obligatorio.");
   }
   if (valor.length > 100) {
     return mostrarError("nombre", "El nombre no puede superar los 100 caracteres.");
@@ -174,22 +150,12 @@ function validarNombreContacto() {
   return limpiarError("nombre");
 }
 
-function validarCorreoContacto() {
-  var valor = document.getElementById("correo").value.trim();
-  if (valor === "") {
-    return mostrarError("correo", "Ingresa tu correo.");
-  }
-  if (valor.length > 100) {
-    return mostrarError("correo", "El correo no puede superar los 100 caracteres.");
-  }
-  if (!esCorreoValido(valor)) {
-    return mostrarError("correo", "Usa un correo terminado en " + DOMINIOS_PERMITIDOS + ".");
-  }
-  return limpiarError("correo");
-}
+
+// ---------- contacto ----------
+
 
 function validarComentario() {
-  var valor = document.getElementById("comentario").value.trim();
+  let valor = document.getElementById("comentario").value.trim();
   if (valor === "") {
     return mostrarError("comentario", "Escribe tu mensaje.");
   }
@@ -203,7 +169,7 @@ function validarComentario() {
 // ---------- usuario (sirve para el registro y para el admin) ----------
 
 function validarRun() {
-  var valor = document.getElementById("run").value.trim();
+  let valor = document.getElementById("run").value.trim();
   if (valor === "") {
     return mostrarError("run", "El RUN es obligatorio.");
   }
@@ -223,7 +189,7 @@ function validarRun() {
 }
 
 function validarNombreUsuario() {
-  var valor = document.getElementById("nombre").value.trim();
+  let valor = document.getElementById("nombre").value.trim();
   if (valor === "") {
     return mostrarError("nombre", "El nombre es obligatorio.");
   }
@@ -234,7 +200,7 @@ function validarNombreUsuario() {
 }
 
 function validarApellidos() {
-  var valor = document.getElementById("apellidos").value.trim();
+  let valor = document.getElementById("apellidos").value.trim();
   if (valor === "") {
     return mostrarError("apellidos", "Los apellidos son obligatorios.");
   }
@@ -244,34 +210,10 @@ function validarApellidos() {
   return limpiarError("apellidos");
 }
 
-function validarCorreoUsuario() {
-  var valor = document.getElementById("correo").value.trim();
-  if (valor === "") {
-    return mostrarError("correo", "El correo es obligatorio.");
-  }
-  if (valor.length > 100) {
-    return mostrarError("correo", "El correo no puede superar los 100 caracteres.");
-  }
-  if (!esCorreoValido(valor)) {
-    return mostrarError("correo", "Usa un correo terminado en " + DOMINIOS_PERMITIDOS + ".");
-  }
-  return limpiarError("correo");
-}
-
-function validarClaveNueva() {
-  var valor = document.getElementById("clave").value;
-  if (valor === "") {
-    return mostrarError("clave", "Define una contraseña.");
-  }
-  if (valor.length < 4 || valor.length > 10) {
-    return mostrarError("clave", "La contraseña debe tener entre 4 y 10 caracteres.");
-  }
-  return limpiarError("clave");
-}
 
 function validarRepetirClave() {
-  var valor = document.getElementById("clave2").value;
-  var original = document.getElementById("clave").value;
+  let valor = document.getElementById("clave2").value;
+  let original = document.getElementById("clave").value;
   if (valor === "") {
     return mostrarError("clave2", "Repite la contraseña.");
   }
@@ -282,7 +224,7 @@ function validarRepetirClave() {
 }
 
 function validarTipoUsuario() {
-  var valor = document.getElementById("tipo").value;
+  let valor = document.getElementById("tipo").value;
   if (valor === "") {
     return mostrarError("tipo", "Selecciona el perfil del usuario.");
   }
@@ -290,7 +232,7 @@ function validarTipoUsuario() {
 }
 
 function validarRegion() {
-  var valor = document.getElementById("region").value;
+  let valor = document.getElementById("region").value;
   if (valor === "") {
     return mostrarError("region", "Selecciona la región.");
   }
@@ -298,7 +240,7 @@ function validarRegion() {
 }
 
 function validarComuna() {
-  var valor = document.getElementById("comuna").value;
+  let valor = document.getElementById("comuna").value;
   if (valor === "") {
     return mostrarError("comuna", "Selecciona la comuna.");
   }
@@ -306,7 +248,7 @@ function validarComuna() {
 }
 
 function validarDireccion() {
-  var valor = document.getElementById("direccion").value.trim();
+  let valor = document.getElementById("direccion").value.trim();
   if (valor === "") {
     return mostrarError("direccion", "La dirección es obligatoria.");
   }
@@ -320,7 +262,7 @@ function validarDireccion() {
 // ---------- producto ----------
 
 function validarCodigoProducto() {
-  var valor = document.getElementById("codigo").value.trim();
+  let valor = document.getElementById("codigo").value.trim();
   if (valor === "") {
     return mostrarError("codigo", "El código es obligatorio.");
   }
@@ -333,19 +275,9 @@ function validarCodigoProducto() {
   return limpiarError("codigo");
 }
 
-function validarNombreProducto() {
-  var valor = document.getElementById("nombre").value.trim();
-  if (valor === "") {
-    return mostrarError("nombre", "El nombre es obligatorio.");
-  }
-  if (valor.length > 100) {
-    return mostrarError("nombre", "El nombre no puede superar los 100 caracteres.");
-  }
-  return limpiarError("nombre");
-}
 
 function validarDescripcion() {
-  var valor = document.getElementById("descripcion").value;
+  let valor = document.getElementById("descripcion").value;
   if (valor.length > 500) {
     return mostrarError("descripcion", "La descripción no puede superar los 500 caracteres.");
   }
@@ -353,11 +285,11 @@ function validarDescripcion() {
 }
 
 function validarPrecio() {
-  var valor = document.getElementById("precio").value.trim();
+  let valor = document.getElementById("precio").value.trim();
   if (valor === "") {
     return mostrarError("precio", "El precio es obligatorio.");
   }
-  var numero = Number(valor);
+  let numero = Number(valor);
   if (isNaN(numero)) {
     return mostrarError("precio", "Ingresa un número válido.");
   }
@@ -368,11 +300,11 @@ function validarPrecio() {
 }
 
 function validarStock() {
-  var valor = document.getElementById("stock").value.trim();
+  let valor = document.getElementById("stock").value.trim();
   if (valor === "") {
     return mostrarError("stock", "El stock es obligatorio.");
   }
-  var numero = Number(valor);
+  let numero = Number(valor);
   if (isNaN(numero)) {
     return mostrarError("stock", "Ingresa un número válido.");
   }
@@ -385,13 +317,13 @@ function validarStock() {
   return limpiarError("stock");
 }
 
-// este es opcional, si viene vacio lo damos por bueno
+// es opcional, si viene vacio pasa
 function validarStockCritico() {
-  var valor = document.getElementById("stockCritico").value.trim();
+  let valor = document.getElementById("stockCritico").value.trim();
   if (valor === "") {
     return limpiarError("stockCritico");
   }
-  var numero = Number(valor);
+  let numero = Number(valor);
   if (isNaN(numero)) {
     return mostrarError("stockCritico", "Ingresa un número válido.");
   }
@@ -405,7 +337,7 @@ function validarStockCritico() {
 }
 
 function validarCategoria() {
-  var valor = document.getElementById("categoria").value;
+  let valor = document.getElementById("categoria").value;
   if (valor === "") {
     return mostrarError("categoria", "Selecciona una categoría.");
   }

@@ -1,16 +1,16 @@
-// datos.js - datos de la tienda y funciones para leer/guardar en localStorage
+// datos.js - datos de la tienda y funciones del localStorage
 
-// claves que usamos en el localStorage
-var CLAVE_PRODUCTOS = "cgs_productos";
-var CLAVE_USUARIOS = "cgs_usuarios";
-var CLAVE_CARRITO = "cgs_carrito";
-var CLAVE_SESION = "cgs_sesion";
+// claves del localStorage
+const CLAVE_PRODUCTOS = "cgs_productos";
+const CLAVE_USUARIOS = "cgs_usuarios";
+const CLAVE_CARRITO = "cgs_carrito";
+const CLAVE_SESION = "cgs_sesion";
 
-var categorias = ["Camisetas", "Shorts", "Abrigo", "Accesorios"];
-var roles = ["Administrador", "Vendedor", "Cliente"];
+const categorias = ["Camisetas", "Shorts", "Abrigo", "Accesorios"];
+const roles = ["Administrador", "Vendedor", "Cliente"];
 
-// catalogo de partida, solo se usa la primera vez que se abre la pagina
-var productosIniciales = [
+// catalogo de partida
+const productosIniciales = [
   {
     id: 1,
     codigo: "CAM-CORD-01",
@@ -98,11 +98,22 @@ var productosIniciales = [
     stockCritico: 3,
     categoria: "Abrigo",
     imagen: "chaqueta-banca.svg"
+  },
+  {
+    id: 9,
+    codigo: "CAM-BAL-09",
+    nombre: "Camiseta Balón Clásico",
+    descripcion: "Polera blanca de algodón con el balón estampado al centro. La primera que sacamos y la que más se repite en los pedidos.",
+    precio: 19990,
+    stock: 45,
+    stockCritico: 8,
+    categoria: "Camisetas",
+    imagen: "iconocgs.webp"
   }
 ];
 
 // usuarios de prueba, la clave de todos es 1234
-var usuariosIniciales = [
+const usuariosIniciales = [
   {
     id: 1,
     run: "190110222",
@@ -157,8 +168,8 @@ var usuariosIniciales = [
   }
 ];
 
-// ordenes de ejemplo, solo para mostrarlas en la tabla del admin
-var ordenes = [
+// ordenes de ejemplo para la tabla del admin
+const ordenes = [
   { numero: "SO1001", fecha: "2026-08-28", cliente: "Matías Rojas", estado: "Enviado", total: 67980 },
   { numero: "SO1002", fecha: "2026-08-29", cliente: "Paula Vergara", estado: "Pendiente", total: 34990 },
   { numero: "SO1003", fecha: "2026-08-30", cliente: "Ignacio Bravo", estado: "Cancelado", total: 18990 },
@@ -167,8 +178,8 @@ var ordenes = [
   { numero: "SO1006", fecha: "2026-09-05", cliente: "Camila Fuenzalida", estado: "Pendiente", total: 25980 }
 ];
 
-// regiones con sus comunas, para los select en cascada
-var regiones = [
+// regiones con sus comunas
+const regiones = [
   { codigo: "15", nombre: "Arica y Parinacota", comunas: ["Arica", "Camarones", "Putre", "General Lagos"] },
   { codigo: "01", nombre: "Tarapacá", comunas: ["Iquique", "Alto Hospicio", "Pozo Almonte", "Pica", "Huara"] },
   { codigo: "02", nombre: "Antofagasta", comunas: ["Antofagasta", "Calama", "Tocopilla", "Mejillones", "Taltal"] },
@@ -191,30 +202,18 @@ var regiones = [
 // ---------- localStorage ----------
 
 function guardarEnStorage(clave, valor) {
-  try {
-    localStorage.setItem(clave, JSON.stringify(valor));
-    return true;
-  } catch (error) {
-    console.log("No se pudo guardar " + clave, error);
-    return false;
-  }
+  localStorage.setItem(clave, JSON.stringify(valor));
 }
 
 function leerDeStorage(clave, porDefecto) {
-  var texto = localStorage.getItem(clave);
+  const texto = localStorage.getItem(clave);
   if (!texto) {
     return porDefecto;
   }
-  try {
-    return JSON.parse(texto);
-  } catch (error) {
-    // si el json quedo malo devolvemos los datos de partida
-    console.log("No se pudo leer " + clave, error);
-    return porDefecto;
-  }
+  return JSON.parse(texto);
 }
 
-// copia una lista para no modificar los datos originales
+// copia la lista para no tocar los datos originales
 function copiarLista(lista) {
   return JSON.parse(JSON.stringify(lista));
 }
@@ -231,9 +230,9 @@ function guardarProductos(lista) {
 }
 
 function buscarProducto(id) {
-  var numero = Number(id);
-  var lista = obtenerProductos();
-  for (var i = 0; i < lista.length; i++) {
+  let numero = Number(id);
+  let lista = obtenerProductos();
+  for (let i = 0; i < lista.length; i++) {
     if (lista[i].id === numero) {
       return lista[i];
     }
@@ -253,9 +252,9 @@ function guardarUsuarios(lista) {
 }
 
 function buscarUsuario(id) {
-  var numero = Number(id);
-  var lista = obtenerUsuarios();
-  for (var i = 0; i < lista.length; i++) {
+  let numero = Number(id);
+  let lista = obtenerUsuarios();
+  for (let i = 0; i < lista.length; i++) {
     if (lista[i].id === numero) {
       return lista[i];
     }
@@ -263,10 +262,10 @@ function buscarUsuario(id) {
   return null;
 }
 
-// el id nuevo es el mas alto que exista mas uno
+// el id nuevo es el mas alto + 1
 function siguienteId(lista) {
-  var mayor = 0;
-  for (var i = 0; i < lista.length; i++) {
+  let mayor = 0;
+  for (let i = 0; i < lista.length; i++) {
     if (lista[i].id > mayor) {
       mayor = lista[i].id;
     }
@@ -278,7 +277,7 @@ function siguienteId(lista) {
 // ---------- regiones ----------
 
 function comunasDeRegion(codigo) {
-  for (var i = 0; i < regiones.length; i++) {
+  for (let i = 0; i < regiones.length; i++) {
     if (regiones[i].codigo === codigo) {
       return regiones[i].comunas;
     }
@@ -287,7 +286,7 @@ function comunasDeRegion(codigo) {
 }
 
 function nombreDeRegion(codigo) {
-  for (var i = 0; i < regiones.length; i++) {
+  for (let i = 0; i < regiones.length; i++) {
     if (regiones[i].codigo === codigo) {
       return regiones[i].nombre;
     }
@@ -296,10 +295,10 @@ function nombreDeRegion(codigo) {
 }
 
 
-// ---------- ayudas generales ----------
+// ---------- varios ----------
 
 function formatearPrecio(valor) {
-  var numero = Number(valor);
+  let numero = Number(valor);
   if (!numero) {
     return "Gratis";
   }
@@ -310,21 +309,26 @@ function formatearPrecio(valor) {
   });
 }
 
-// lee un parametro de la url, por ejemplo producto.html?id=3
+// lee el id de la url, por ejemplo detalle-producto.html?id=3
 function obtenerParametro(nombre) {
-  var parametros = new URLSearchParams(window.location.search);
-  return parametros.get(nombre);
+  const partes = window.location.search.replace("?", "").split("&");
+  for (let i = 0; i < partes.length; i++) {
+    const par = partes[i].split("=");
+    if (par[0] === nombre) {
+      return decodeURIComponent(par[1]);
+    }
+  }
+  return null;
 }
 
-// las paginas dentro de pages/ y admin/ guardan "../" en el body
+// las paginas de pages/ tienen "../" en el body
 function raizSitio() {
   return document.body.getAttribute("data-raiz") || "";
 }
 
-// escapamos el texto antes de meterlo con innerHTML para que un nombre
-// con < o " no rompa la pagina
+// escapa el texto antes de meterlo con innerHTML
 function escaparTexto(texto) {
-  var salida = String(texto);
+  let salida = String(texto);
   salida = salida.split("&").join("&amp;");
   salida = salida.split("<").join("&lt;");
   salida = salida.split(">").join("&gt;");
@@ -332,9 +336,9 @@ function escaparTexto(texto) {
   return salida;
 }
 
-// muestra el mensajito verde o rojo que tienen varias paginas
+// mensaje verde o rojo de aviso
 function mostrarAviso(mensaje, esError) {
-  var zona = document.querySelector("[data-anuncio]");
+  let zona = document.querySelector("[data-anuncio]");
   if (!zona) {
     return;
   }

@@ -22,45 +22,20 @@ function cerrarSesion() {
 
 // ---------- menu del celular ----------
 
-function esPantallaChica() {
-  return window.matchMedia("(max-width: 767px)").matches;
-}
-
 function iniciarMenu() {
-  var boton = document.querySelector("[data-menu-boton]");
-  var menu = document.querySelector("[data-menu]");
+  const boton = document.querySelector("[data-menu-boton]");
+  const menu = document.querySelector("[data-menu]");
   if (!boton || !menu) {
     return;
   }
 
-  // en el celular el menu parte cerrado, en pantalla grande el css lo muestra igual
-  if (esPantallaChica()) {
-    menu.hidden = true;
-  }
-
   boton.addEventListener("click", function () {
-    var abierto = boton.getAttribute("aria-expanded") === "true";
-    if (abierto) {
+    if (menu.classList.contains("menu--abierto")) {
+      menu.classList.remove("menu--abierto");
       boton.setAttribute("aria-expanded", "false");
-      menu.hidden = true;
     } else {
+      menu.classList.add("menu--abierto");
       boton.setAttribute("aria-expanded", "true");
-      menu.hidden = false;
-    }
-  });
-
-  document.addEventListener("keydown", function (evento) {
-    if (evento.key === "Escape" && esPantallaChica()) {
-      boton.setAttribute("aria-expanded", "false");
-      menu.hidden = true;
-    }
-  });
-
-  window.addEventListener("resize", function () {
-    if (!esPantallaChica()) {
-      menu.hidden = false;
-    } else if (boton.getAttribute("aria-expanded") !== "true") {
-      menu.hidden = true;
     }
   });
 }
@@ -69,9 +44,9 @@ function iniciarMenu() {
 // ---------- cabecera y pie ----------
 
 function iniciarCabecera() {
-  var raiz = raizSitio();
-  var usuario = obtenerSesion();
-  var enlace = document.querySelector("[data-sesion-enlace]");
+  let raiz = raizSitio();
+  let usuario = obtenerSesion();
+  let enlace = document.querySelector("[data-sesion-enlace]");
 
   if (enlace) {
     if (!usuario) {
@@ -82,11 +57,11 @@ function iniciarCabecera() {
       enlace.href = raiz + "pages/carrito.html";
     } else {
       enlace.textContent = "Panel admin";
-      enlace.href = raiz + "admin/index.html";
+      enlace.href = raiz + "pages/admin-home.html";
     }
   }
 
-  var salir = document.querySelector("[data-cerrar-sesion]");
+  let salir = document.querySelector("[data-cerrar-sesion]");
   if (salir) {
     salir.hidden = !usuario;
     salir.addEventListener("click", function (evento) {
@@ -96,7 +71,7 @@ function iniciarCabecera() {
     });
   }
 
-  var anio = document.querySelector("[data-anio]");
+  let anio = document.querySelector("[data-anio]");
   if (anio) {
     anio.textContent = new Date().getFullYear();
   }
@@ -107,18 +82,18 @@ function iniciarCabecera() {
 
 // ---------- select de region y comuna ----------
 
-// llena el select de comunas segun la region elegida
+// llena las comunas de la region elegida
 function llenarComunas(regionElegida, comunaElegida) {
-  var selectComuna = document.getElementById("comuna");
-  var comunas = comunasDeRegion(regionElegida);
-  var html = "";
+  let selectComuna = document.getElementById("comuna");
+  let comunas = comunasDeRegion(regionElegida);
+  let html = "";
 
   if (comunas.length === 0) {
     html = '<option value="">-- Elige primero una región --</option>';
     selectComuna.disabled = true;
   } else {
     html = '<option value="">-- Selecciona la comuna --</option>';
-    for (var i = 0; i < comunas.length; i++) {
+    for (let i = 0; i < comunas.length; i++) {
       html += '<option value="' + escaparTexto(comunas[i]) + '">' + escaparTexto(comunas[i]) + '</option>';
     }
     selectComuna.disabled = false;
@@ -132,18 +107,18 @@ function llenarComunas(regionElegida, comunaElegida) {
 }
 
 function llenarRegiones(regionElegida, comunaElegida) {
-  var selectRegion = document.getElementById("region");
+  let selectRegion = document.getElementById("region");
   if (!selectRegion) {
     return;
   }
 
-  var html = '<option value="">-- Selecciona la región --</option>';
-  for (var i = 0; i < regiones.length; i++) {
+  let html = '<option value="">-- Selecciona la región --</option>';
+  for (let i = 0; i < regiones.length; i++) {
     html += '<option value="' + regiones[i].codigo + '">' + escaparTexto(regiones[i].nombre) + '</option>';
   }
   selectRegion.innerHTML = html;
 
-  // cada vez que cambia la region se rearman las comunas
+  // al cambiar la region cambian las comunas
   selectRegion.addEventListener("change", function () {
     llenarComunas(selectRegion.value, "");
   });
@@ -160,26 +135,25 @@ function llenarRegiones(regionElegida, comunaElegida) {
 // ---------- formulario de login ----------
 
 function iniciarLogin() {
-  var formulario = document.querySelector("[data-form-login]");
+  let formulario = document.querySelector("[data-form-login]");
   if (!formulario) {
     return;
   }
 
-  // si el admin nos mando para aca por no tener sesion, avisamos
   if (obtenerParametro("motivo") === "sesion") {
-    var zona = formulario.querySelector("[data-resultado]");
+    let zona = formulario.querySelector("[data-resultado]");
     zona.className = "aviso aviso--precaucion formulario__resultado";
     zona.textContent = "Inicia sesión para entrar al panel de administración.";
   }
 
-  conectarCampo("correo", validarCorreoLogin);
-  conectarCampo("clave", validarClaveLogin);
+  conectarCampo("correo", validarCorreo);
+  conectarCampo("clave", validarClave);
 
   formulario.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    var correoOk = validarCorreoLogin();
-    var claveOk = validarClaveLogin();
+    let correoOk = validarCorreo();
+    let claveOk = validarClave();
 
     if (!correoOk || !claveOk) {
       mostrarResultado(formulario, "Revisa los campos marcados antes de continuar.", true);
@@ -187,12 +161,12 @@ function iniciarLogin() {
       return;
     }
 
-    var correo = document.getElementById("correo").value.trim().toLowerCase();
-    var clave = document.getElementById("clave").value;
+    let correo = document.getElementById("correo").value.trim().toLowerCase();
+    let clave = document.getElementById("clave").value;
 
-    var usuarios = obtenerUsuarios();
-    var encontrado = null;
-    for (var i = 0; i < usuarios.length; i++) {
+    let usuarios = obtenerUsuarios();
+    let encontrado = null;
+    for (let i = 0; i < usuarios.length; i++) {
       if (usuarios[i].correo.toLowerCase() === correo && usuarios[i].clave === clave) {
         encontrado = usuarios[i];
       }
@@ -208,7 +182,7 @@ function iniciarLogin() {
     if (encontrado.tipo === "Cliente") {
       window.location.href = raizSitio() + "index.html";
     } else {
-      window.location.href = raizSitio() + "admin/index.html";
+      window.location.href = raizSitio() + "pages/admin-home.html";
     }
   });
 }
@@ -217,19 +191,18 @@ function iniciarLogin() {
 // ---------- formulario de registro ----------
 
 function iniciarRegistro() {
-  var formulario = document.querySelector("[data-form-registro]");
+  let formulario = document.querySelector("[data-form-registro]");
   if (!formulario) {
     return;
   }
 
   llenarRegiones("", "");
-  conectarContador("direccion", 300);
 
   conectarCampo("run", validarRun);
   conectarCampo("nombre", validarNombreUsuario);
   conectarCampo("apellidos", validarApellidos);
-  conectarCampo("correo", validarCorreoUsuario);
-  conectarCampo("clave", validarClaveNueva);
+  conectarCampo("correo", validarCorreo);
+  conectarCampo("clave", validarClave);
   conectarCampo("clave2", validarRepetirClave);
   conectarCampo("region", validarRegion);
   conectarCampo("comuna", validarComuna);
@@ -238,20 +211,20 @@ function iniciarRegistro() {
   formulario.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    // los llamamos todos por separado para que se marquen todos los errores
-    var revisiones = [
+    // los llamo todos para que se marquen todos los errores
+    let revisiones = [
       validarRun(),
       validarNombreUsuario(),
       validarApellidos(),
-      validarCorreoUsuario(),
-      validarClaveNueva(),
+      validarCorreo(),
+      validarClave(),
       validarRepetirClave(),
       validarRegion(),
       validarComuna(),
       validarDireccion()
     ];
 
-    for (var i = 0; i < revisiones.length; i++) {
+    for (let i = 0; i < revisiones.length; i++) {
       if (revisiones[i] === false) {
         mostrarResultado(formulario, "Revisa los campos marcados antes de continuar.", true);
         enfocarPrimerError(formulario);
@@ -259,11 +232,11 @@ function iniciarRegistro() {
       }
     }
 
-    var run = document.getElementById("run").value.trim().toUpperCase();
-    var correo = document.getElementById("correo").value.trim();
+    let run = document.getElementById("run").value.trim().toUpperCase();
+    let correo = document.getElementById("correo").value.trim();
 
-    var usuarios = obtenerUsuarios();
-    for (var j = 0; j < usuarios.length; j++) {
+    let usuarios = obtenerUsuarios();
+    for (let j = 0; j < usuarios.length; j++) {
       if (usuarios[j].run.toUpperCase() === run || usuarios[j].correo.toLowerCase() === correo.toLowerCase()) {
         mostrarResultado(formulario, "Ya existe una cuenta con ese RUN o ese correo.", true);
         return;
@@ -278,7 +251,7 @@ function iniciarRegistro() {
       correo: correo,
       clave: document.getElementById("clave").value,
       fechaNacimiento: document.getElementById("fechaNacimiento").value,
-      tipo: "Cliente", // el rol solo se cambia desde el admin
+      tipo: "Cliente",
       region: document.getElementById("region").value,
       comuna: document.getElementById("comuna").value,
       direccion: document.getElementById("direccion").value.trim()
@@ -296,23 +269,22 @@ function iniciarRegistro() {
 // ---------- formulario de contacto ----------
 
 function iniciarContacto() {
-  var formulario = document.querySelector("[data-form-contacto]");
+  let formulario = document.querySelector("[data-form-contacto]");
   if (!formulario) {
     return;
   }
 
-  conectarContador("comentario", 500);
 
-  conectarCampo("nombre", validarNombreContacto);
-  conectarCampo("correo", validarCorreoContacto);
+  conectarCampo("nombre", validarNombre);
+  conectarCampo("correo", validarCorreo);
   conectarCampo("comentario", validarComentario);
 
   formulario.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
-    var nombreOk = validarNombreContacto();
-    var correoOk = validarCorreoContacto();
-    var comentarioOk = validarComentario();
+    let nombreOk = validarNombre();
+    let correoOk = validarCorreo();
+    let comentarioOk = validarComentario();
 
     if (!nombreOk || !correoOk || !comentarioOk) {
       mostrarResultado(formulario, "Revisa los campos marcados antes de continuar.", true);
@@ -320,11 +292,10 @@ function iniciarContacto() {
       return;
     }
 
-    var nombre = document.getElementById("nombre").value.trim();
-    var correo = document.getElementById("correo").value.trim();
+    let nombre = document.getElementById("nombre").value.trim();
+    let correo = document.getElementById("correo").value.trim();
 
     formulario.reset();
-    document.querySelector('[data-contador-de="comentario"]').textContent = "0 / 500";
     mostrarResultado(formulario, "Gracias " + nombre + ", recibimos tu mensaje. Te responderemos a " + correo + ".", false);
   });
 }

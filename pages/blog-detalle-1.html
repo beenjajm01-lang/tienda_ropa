@@ -3,27 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ficha de producto con descripción, stock disponible y opción de añadir al carrito.">
-  <title>Detalle del producto · ChileGol Store</title>
-  <link rel="icon" href="../imagenes/logo-cgs.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../styles/global.css">
-  <link rel="stylesheet" href="../styles/header.css">
-  <link rel="stylesheet" href="../styles/footer.css">
-  <link rel="stylesheet" href="../styles/calugas.css">
-  <link rel="stylesheet" href="../styles/formularios.css">
-  <link rel="stylesheet" href="../styles/responsive.css">
+  <meta name="description" content="El análisis de los pedidos detrás de la reedición del modelo de 1988.">
+  <title>Por qué la camiseta retro volvió a agotarse · ChileGol Store</title>
+  <link rel="icon" href="../images/logo-cgs.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../styles/styles.css">
   <script src="../scripts/datos.js" defer></script>
   <script src="../scripts/validaciones.js" defer></script>
   <script src="../scripts/carrito.js" defer></script>
   <script src="../scripts/productos.js" defer></script>
   <script src="../scripts/principal.js" defer></script>
+  <script src="../scripts/admin.js" defer></script>
 </head>
 <body data-raiz="../">
     <a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
     <header class="cabecera">
       <nav class="cabecera__nav" aria-label="Navegación principal">
         <a class="marca" href="../index.html">
-          <img class="marca__icono" src="../imagenes/logo-cgs.svg" alt="" width="38" height="38">
+          <img class="marca__icono" src="../images/logo-cgs.svg" alt="" width="38" height="38">
           <span>ChileGol Store</span>
         </a>
 
@@ -34,15 +30,15 @@
 
         <ul class="menu" id="menu-principal" data-menu>
           <li><a href="../index.html">Inicio</a></li>
-          <li><a href="../pages/productos.html" aria-current="page">Productos</a></li>
-          <li><a href="../pages/nosotros.html">Nosotros</a></li>
-          <li><a href="../pages/blogs.html">Blogs</a></li>
-          <li><a href="../pages/contacto.html">Contacto</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html" aria-current="page">Blogs</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
         </ul>
 
         <div class="acciones">
-          <a href="../pages/login.html" data-sesion-enlace>Iniciar sesión</a>
-          <a class="carrito-boton" href="../pages/carrito.html">
+          <a href="login.html" data-sesion-enlace>Iniciar sesión</a>
+          <a class="carrito-boton" href="carrito.html">
             <svg class="carrito-boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6.2 6H21l-2 8H8L6.2 6ZM6.2 6 5.5 3H2v2h2l2.6 11.2A2 2 0 0 0 8.6 18H19v-2H8.9L6.2 6Z"/></svg>
             <span>Carrito</span>
             <span class="carrito-boton__conteo" data-carrito-conteo aria-label="productos en el carrito">0</span>
@@ -56,44 +52,50 @@
         <nav aria-label="Ruta de navegación">
           <ol class="migas">
             <li><a href="../index.html">Inicio</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li><span data-miga-producto>Detalle</span></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li>Camiseta retro</li>
           </ol>
         </nav>
 
-        <p class="aviso" data-anuncio hidden role="status"></p>
+        <article class="articulo prosa">
+          <p class="nota__fecha">28 de agosto de 2026</p>
+          <h1>Por qué la camiseta retro volvió a agotarse</h1>
 
-        <article class="detalle" data-detalle>
-          <figure class="detalle__galeria">
-            <img data-campo="imagen" src="../imagenes/camiseta-cordillera.svg" alt="" width="600" height="600">
+          <figure class="articulo__portada">
+            <img src="../images/blog-copa.svg" alt="Camiseta retro de 1988 sobre una mesa de corte" width="640" height="360">
           </figure>
 
-          <div>
-            <h1 data-campo="nombre">Producto</h1>
-            <p class="detalle__precio" data-campo="precio"></p>
-            <p class="detalle__descripcion" data-campo="descripcion"></p>
+          <p>
+            La primera producción de la Retro 88 fueron cien unidades. Calculamos que
+            durarían el trimestre completo. Se agotaron en nueve días y quedaron
+            doscientas personas en lista de espera.
+          </p>
+          <p>
+            Al revisar los pedidos encontramos algo que no esperábamos: el 62% de las
+            compras las hicieron personas que no habían nacido en 1988. La camiseta no
+            se vendió por nostalgia propia, sino heredada. Varios pedidos venían con
+            una nota pidiendo envolverla para regalo.
+          </p>
 
-            <div class="detalle__compra">
-              <div class="campo">
-                <label for="cantidad">Cantidad</label>
-                <input id="cantidad" name="cantidad" type="number" value="1" min="1" step="1" inputmode="numeric">
-              </div>
-              <button class="boton boton--principal" type="button" data-agregar-detalle>Añadir al carrito</button>
-            </div>
+          <h2>Lo que cambiamos para la segunda tanda</h2>
+          <p>
+            Subimos la producción a trescientas unidades, agregamos las tallas XS y XXL
+            —las dos que más se pidieron por correo— y mantuvimos el cuello polo original,
+            que era lo que más se mencionaba en los comentarios.
+          </p>
+          <p>
+            Lo que no cambiamos fue el algodón peinado. Es más caro que el poliéster y
+            se arruga más, pero es la razón por la que la prenda se siente como la del 88.
+          </p>
 
-            <dl class="detalle__ficha">
-              <div><dt>Código</dt><dd data-campo="codigo"></dd></div>
-              <div><dt>Categoría</dt><dd data-campo="categoria"></dd></div>
-              <div><dt>Disponibilidad</dt><dd data-campo="stock"></dd></div>
-            </dl>
-          </div>
+          <h2>Qué viene después</h2>
+          <p>
+            Estamos revisando los archivos de 1993 y 1997. Si encontramos los patrones
+            originales, la siguiente reedición sale en marzo.
+          </p>
+
+          <p><a class="boton boton--secundario" href="blogs.html">Volver a los blogs</a></p>
         </article>
-
-        <section class="seccion">
-          <h2 class="seccion__titulo">También te puede servir</h2>
-          <p class="seccion__bajada">Otras prendas de la misma categoría.</p>
-          <div class="calugas" data-relacionados></div>
-        </section>
       </div>
     </main>
 
@@ -106,10 +108,10 @@
         <section>
           <h2>Tienda</h2>
           <ul class="pie__enlaces">
-            <li><a href="../pages/productos.html">Todos los productos</a></li>
-            <li><a href="../pages/carrito.html">Mi carrito</a></li>
-            <li><a href="../pages/registro.html">Crear cuenta</a></li>
-            <li><a href="../pages/contacto.html">Contacto</a></li>
+            <li><a href="productos.html">Todos los productos</a></li>
+            <li><a href="carrito.html">Mi carrito</a></li>
+            <li><a href="registro.html">Crear cuenta</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
           </ul>
         </section>
         <section>
