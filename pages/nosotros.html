@@ -3,44 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Quiénes somos, cómo confeccionamos y quién desarrolló este sitio.">
+  <meta name="description" content="Conoce la historia y el equipo detras de ChileGol Store.">
   <title>Nosotros · ChileGol Store</title>
   <link rel="icon" href="../images/logo-cgs.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../styles/styles.css">
   <script src="../scripts/datos.js" defer></script>
-  <script src="../scripts/validaciones.js" defer></script>
   <script src="../scripts/carrito.js" defer></script>
-  <script src="../scripts/productos.js" defer></script>
   <script src="../scripts/principal.js" defer></script>
-  <script src="../scripts/admin.js" defer></script>
 </head>
 <body data-raiz="../">
-    <a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
     <header class="cabecera">
       <nav class="cabecera__nav" aria-label="Navegación principal">
         <a class="marca" href="../index.html">
-          <img class="marca__icono" src="../images/logo-cgs.svg" alt="" width="38" height="38">
+          <img class="marca__icono" src="../images/logo-cgs.svg" alt="Logo ChileGol" width="38" height="38">
           <span>ChileGol Store</span>
         </a>
 
-        <button class="menu-boton" type="button" data-menu-boton aria-expanded="false" aria-controls="menu-principal">
-          <span class="menu-boton__barras" aria-hidden="true"></span>
-          Menú
-        </button>
-
-        <ul class="menu" id="menu-principal" data-menu>
+        <ul class="menu" id="menu-principal">
           <li><a href="../index.html">Inicio</a></li>
           <li><a href="productos.html">Productos</a></li>
-          <li><a href="nosotros.html" aria-current="page">Nosotros</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
 
         <div class="acciones">
           <a href="login.html" data-sesion-enlace>Iniciar sesión</a>
           <a class="carrito-boton" href="carrito.html">
-            <svg class="carrito-boton__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6.2 6H21l-2 8H8L6.2 6ZM6.2 6 5.5 3H2v2h2l2.6 11.2A2 2 0 0 0 8.6 18H19v-2H8.9L6.2 6Z"/></svg>
             <span>Carrito</span>
-            <span class="carrito-boton__conteo" data-carrito-conteo aria-label="productos en el carrito">0</span>
+            <span class="carrito-boton__conteo" data-carrito-conteo>0</span>
           </a>
         </div>
       </nav>
@@ -49,30 +39,24 @@
     <main id="contenido">
       <section class="seccion">
         <div class="contenedor">
-          <h1>Nosotros</h1>
-          <div class="prosa su-20">
+          <h1>Sobre Nosotros</h1>
+          <div class="prosa">
             <p>
-              ChileGol Store nació en 2024 en un taller de Independencia, con una máquina
-              recta prestada y un pedido de veinte camisetas para un club de barrio.
-              Hoy despachamos a las dieciséis regiones del país y seguimos confeccionando
-              en Chile.
+              ChileGol Store nació como un proyecto dedicado a reunir las mejores camisetas del fútbol chileno en un solo lugar. Comenzamos con pedidos pequeños para hinchas locales y hoy buscamos llevar los colores de todos los clubes a cada rincón del país.
             </p>
             <p>
-              Nos interesa una cosa por sobre todas: que la prenda dure. Por eso publicamos
-              la composición de cada tela, las medidas reales en centímetros y el taller
-              donde se cosió. Si algo se descose antes del año, lo reparamos sin costo.
+              Nos enfocamos en entregar prendas con diseños fieles, buena confección y envíos rápidos a todas las regiones, para que puedas alentar a tu equipo tanto en la cancha como en el día a día.
             </p>
           </div>
         </div>
       </section>
-
     </main>
 
     <footer class="pie">
       <div class="pie__grid">
         <section>
           <h2>ChileGol Store</h2>
-          <p>Camisetas y ropa de fútbol hechas en Chile. Enviamos a todo el país en 48 horas hábiles.</p>
+          <p>Camisetas de fútbol con despacho a todo el país.</p>
         </section>
         <section>
           <h2>Tienda</h2>
@@ -84,18 +68,12 @@
           </ul>
         </section>
         <section>
-          <h2>Novedades por correo</h2>
-          <p>Te avisamos cuando entra una camiseta nueva. Sin spam.</p>
-          <div class="suscripcion">
-            <label class="solo-lectores" for="pie-correo">Tu correo</label>
-            <input id="pie-correo" name="pie-correo" type="email" placeholder="tucorreo@gmail.com" autocomplete="email">
-            <button class="boton boton--principal boton--pequeno" type="button">Suscribirme</button>
-          </div>
+          <h2>Contacto</h2>
+          <p>contacto@chilegolstore.cl</p>
         </section>
       </div>
       <p class="pie__legal">
-        &copy; <span data-anio>2026</span> ChileGol Store &middot; Proyecto académico DSY1104, Duoc UC.
-        <a href="#" data-cerrar-sesion hidden>Cerrar sesión</a>
+        ChileGol Store - 2026 &middot; Proyecto Full Stack II
       </p>
     </footer>
 </body>

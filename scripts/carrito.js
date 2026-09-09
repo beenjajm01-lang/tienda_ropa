@@ -78,21 +78,23 @@ function cambiarCantidad(id, cambio) {
     tope = producto.stock;
   }
 
-  const nuevos = [];
   for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    if (item.id === id) {
-      item.cantidad = item.cantidad + cambio;
-      if (item.cantidad > tope) {
-        item.cantidad = tope;
+    if (items[i].id === id) {
+      items[i].cantidad = items[i].cantidad + cambio;
+
+      if (items[i].cantidad > tope) {
+        items[i].cantidad = tope;
       }
-    }
-    if (item.cantidad > 0) {
-      nuevos.push(item);
+
+      if (items[i].cantidad <= 0) {
+        eliminarDelCarrito(id);
+        return;
+      }
+      break;
     }
   }
 
-  guardarCarrito(nuevos);
+  guardarCarrito(items);
 }
 
 function eliminarDelCarrito(id) {
@@ -137,3 +139,4 @@ function actualizarContadorCarrito() {
     marcas[i].textContent = total;
   }
 }
+

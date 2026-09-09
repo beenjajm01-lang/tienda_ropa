@@ -48,6 +48,7 @@ function iniciarCabecera() {
   let usuario = obtenerSesion();
   let enlace = document.querySelector("[data-sesion-enlace]");
 
+  // si inicio sesion le cambio el texto al boton del header
   if (enlace) {
     if (!usuario) {
       enlace.textContent = "Iniciar sesión";
@@ -61,6 +62,7 @@ function iniciarCabecera() {
     }
   }
 
+  // boton de salir que aparece abajo en el footer
   let salir = document.querySelector("[data-cerrar-sesion]");
   if (salir) {
     salir.hidden = !usuario;
@@ -71,6 +73,7 @@ function iniciarCabecera() {
     });
   }
 
+  // año dinamico pal footer
   let anio = document.querySelector("[data-anio]");
   if (anio) {
     anio.textContent = new Date().getFullYear();
@@ -85,6 +88,10 @@ function iniciarCabecera() {
 // llena las comunas de la region elegida
 function llenarComunas(regionElegida, comunaElegida) {
   let selectComuna = document.getElementById("comuna");
+  if (!selectComuna) {
+    return;
+  }
+
   let comunas = comunasDeRegion(regionElegida);
   let html = "";
 
@@ -94,7 +101,7 @@ function llenarComunas(regionElegida, comunaElegida) {
   } else {
     html = '<option value="">-- Selecciona la comuna --</option>';
     for (let i = 0; i < comunas.length; i++) {
-      html += '<option value="' + escaparTexto(comunas[i]) + '">' + escaparTexto(comunas[i]) + '</option>';
+      html += '<option value="' + comunas[i] + '">' + comunas[i] + '</option>';
     }
     selectComuna.disabled = false;
   }
@@ -114,7 +121,7 @@ function llenarRegiones(regionElegida, comunaElegida) {
 
   let html = '<option value="">-- Selecciona la región --</option>';
   for (let i = 0; i < regiones.length; i++) {
-    html += '<option value="' + regiones[i].codigo + '">' + escaparTexto(regiones[i].nombre) + '</option>';
+    html += '<option value="' + regiones[i].codigo + '">' + regiones[i].nombre + '</option>';
   }
   selectRegion.innerHTML = html;
 
@@ -136,14 +143,16 @@ function llenarRegiones(regionElegida, comunaElegida) {
 
 function iniciarLogin() {
   let formulario = document.querySelector("[data-form-login]");
-  if (!formulario) {
+  if (!formulario || typeof validarCorreo !== "function") {
     return;
   }
 
   if (obtenerParametro("motivo") === "sesion") {
     let zona = formulario.querySelector("[data-resultado]");
-    zona.className = "aviso aviso--precaucion formulario__resultado";
-    zona.textContent = "Inicia sesión para entrar al panel de administración.";
+    if (zona) {
+      zona.className = "aviso aviso--precaucion formulario__resultado";
+      zona.textContent = "Inicia sesión para entrar al panel de administración.";
+    }
   }
 
   conectarCampo("correo", validarCorreo);
@@ -192,10 +201,9 @@ function iniciarLogin() {
 
 function iniciarRegistro() {
   let formulario = document.querySelector("[data-form-registro]");
-  if (!formulario) {
+  if (!formulario || typeof validarRun !== "function") {
     return;
   }
-
   llenarRegiones("", "");
 
   conectarCampo("run", validarRun);
@@ -270,10 +278,9 @@ function iniciarRegistro() {
 
 function iniciarContacto() {
   let formulario = document.querySelector("[data-form-contacto]");
-  if (!formulario) {
+  if (!formulario || typeof validarNombre !== "function") {
     return;
   }
-
 
   conectarCampo("nombre", validarNombre);
   conectarCampo("correo", validarCorreo);
