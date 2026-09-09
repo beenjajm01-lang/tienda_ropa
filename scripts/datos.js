@@ -9,106 +9,95 @@ const CLAVE_SESION = "cgs_sesion";
 const categorias = ["Camisetas", "Shorts", "Abrigo", "Accesorios"];
 const roles = ["Administrador", "Vendedor", "Cliente"];
 
-// catalogo de partida
+// catalogo con camisetas reales del futbol chileno
 const productosIniciales = [
   {
     id: 1,
-    codigo: "CAM-CORD-01",
-    nombre: "Camiseta Cordillera",
-    descripcion: "Camiseta local en tejido reciclado, con franja diagonal y cuello redondo reforzado. Corte regular, pensada para jugar y para la tribuna.",
-    precio: 34990,
+    codigo: "CAM-CC-01",
+    nombre: "Camiseta Colo-Colo 2026",
+    descripcion: "Camiseta oficial para hacer cagar a Freezer en Namekusei. Confeccionada con fibra saiyajin ultraliviana para meter el Genkidama al ángulo en el minuto 90.",
+    precio: 49990,
     stock: 24,
     stockCritico: 5,
     categoria: "Camisetas",
-    imagen: "camiseta-cordillera.svg"
+    imagen: "goku-colocolo.webp"
   },
   {
     id: 2,
-    codigo: "CAM-PACI-02",
-    nombre: "Camiseta Pacífico",
-    descripcion: "Alternativa en azul profundo con detalles celestes. Tela liviana de secado rápido para entrenamientos largos.",
-    precio: 32990,
-    stock: 3,
+    codigo: "CAM-UDECH-02",
+    nombre: "Camiseta U. de Chile 2026",
+    descripcion: "Polera de tela aerodinámica para recorrer la cancha en la Nube Voladora. Si te la pones, aumenta tu ki de inmediato y no te cansarás ni en prórroga.",
+    precio: 49990,
+    stock: 15,
     stockCritico: 5,
     categoria: "Camisetas",
-    imagen: "camiseta-pacifico.svg"
+    imagen: "goku-udechile.webp"
   },
   {
     id: 3,
-    codigo: "CAM-RET-88",
-    nombre: "Camiseta Retro 88",
-    descripcion: "Reedición del modelo de 1988: algodón peinado, cuello polo y escudo bordado. Edición limitada.",
-    precio: 44990,
-    stock: 12,
+    codigo: "CAM-UC-03",
+    nombre: "Camiseta U. Católica 2026",
+    descripcion: "La franja azul clásica bendecida por Karin en la torre sagrada. Ideal para clavar tiros libres con la fuerza de un Kamehameha cargado.",
+    precio: 47990,
+    stock: 18,
     stockCritico: 4,
     categoria: "Camisetas",
-    imagen: "camiseta-retro-88.svg"
+    imagen: "goku-ucatolica.webp"
   },
   {
     id: 4,
-    codigo: "CAM-CAL-04",
-    nombre: "Camiseta Visita Cal",
-    descripcion: "Camiseta de visita en color cal con ribetes verdes. Costuras planas para evitar roce.",
-    precio: 31990,
-    stock: 18,
-    stockCritico: 5,
+    codigo: "CAM-COB-04",
+    nombre: "Camiseta Cobreloa 2026",
+    descripcion: "Naranja clásico traído directamente del Templo de Kamisama. Diseñada para aguantar la altura de Calama y el calor del planeta Kaiosama sin sudar.",
+    precio: 42990,
+    stock: 10,
+    stockCritico: 3,
     categoria: "Camisetas",
-    imagen: "camiseta-visita-cal.svg"
+    imagen: "goku-cobreloa.webp"
   },
   {
     id: 5,
-    codigo: "SHO-ARE-05",
-    nombre: "Short Arena",
-    descripcion: "Short de juego con bolsillos internos y pretina elástica ajustable.",
-    precio: 18990,
-    stock: 30,
-    stockCritico: 6,
-    categoria: "Shorts",
-    imagen: "short-arena.svg"
+    codigo: "CAM-SW-05",
+    nombre: "Camiseta Wanderers 2026",
+    descripcion: "El uniforme aprobado por Krilin para esquivar patadas descalificadoras. Corta el viento de los cerros de Valparaíso como si fuera un Kienzan.",
+    precio: 39990,
+    stock: 12,
+    stockCritico: 4,
+    categoria: "Camisetas",
+    imagen: "krilin-wanderers.webp"
   },
   {
     id: 6,
-    codigo: "ABR-HIN-06",
-    nombre: "Polerón Hincha",
-    descripcion: "Polerón con capucha y felpa interior. Pensado para partidos de invierno en el estadio.",
-    precio: 49990,
-    stock: 0,
-    stockCritico: 4,
-    categoria: "Abrigo",
-    imagen: "poleron-hincha.svg"
+    codigo: "CAM-UE-06",
+    nombre: "Camiseta Unión Española 2026",
+    descripcion: "El orgullo del Príncipe de los Saiyajin hecho tela. Advertencia: ponértela aumentará tus ganas de gritarle insecto al árbitro tras cada cobro dudoso.",
+    precio: 39990,
+    stock: 8,
+    stockCritico: 2,
+    categoria: "Camisetas",
+    imagen: "vegeta-uespañola.webp"
   },
   {
     id: 7,
-    codigo: "ACC-ALT-07",
-    nombre: "Medias Altiplano",
-    descripcion: "Par de medias altas con compresión suave en el empeine.",
-    precio: 7990,
-    stock: 60,
-    stockCritico: 10,
-    categoria: "Accesorios",
-    imagen: "medias-altiplano.svg"
+    codigo: "CAM-PAL-07",
+    nombre: "Camiseta Palestino 2026",
+    descripcion: "Pesa más que la capa de entrenamiento de Piccolo, pero al quitártela juegas a la velocidad de la luz. Estilo de sobra para meter goles con el Makankosappo.",
+    precio: 41990,
+    stock: 14,
+    stockCritico: 3,
+    categoria: "Camisetas",
+    imagen: "piccolo-palestino.webp"
   },
   {
     id: 8,
-    codigo: "ABR-BAN-08",
-    nombre: "Chaqueta Banca",
-    descripcion: "Chaqueta cortaviento con forro de malla y cierre completo. Resiste lluvia ligera.",
-    precio: 0,
+    codigo: "CAM-OHI-08",
+    nombre: "Camiseta O'Higgins 2026",
+    descripcion: "La celeste rancagüina para tener visión de tres ojos en la mitad de la cancha. Garantiza tapar todos los contragolpes como si usaras un Kikoho defensivo.",
+    precio: 38990,
     stock: 9,
     stockCritico: 3,
-    categoria: "Abrigo",
-    imagen: "chaqueta-banca.svg"
-  },
-  {
-    id: 9,
-    codigo: "CAM-BAL-09",
-    nombre: "Camiseta Balón Clásico",
-    descripcion: "Polera blanca de algodón con el balón estampado al centro. La primera que sacamos y la que más se repite en los pedidos.",
-    precio: 19990,
-    stock: 45,
-    stockCritico: 8,
     categoria: "Camisetas",
-    imagen: "iconocgs.webp"
+    imagen: "tenshinhan-ohiggins.webp"
   }
 ];
 
@@ -168,16 +157,6 @@ const usuariosIniciales = [
   }
 ];
 
-// ordenes de ejemplo para la tabla del admin
-const ordenes = [
-  { numero: "SO1001", fecha: "2026-08-28", cliente: "Matías Rojas", estado: "Enviado", total: 67980 },
-  { numero: "SO1002", fecha: "2026-08-29", cliente: "Paula Vergara", estado: "Pendiente", total: 34990 },
-  { numero: "SO1003", fecha: "2026-08-30", cliente: "Ignacio Bravo", estado: "Cancelado", total: 18990 },
-  { numero: "SO1004", fecha: "2026-09-01", cliente: "Daniela Retamal", estado: "Procesando", total: 112970 },
-  { numero: "SO1005", fecha: "2026-09-03", cliente: "Echo Enterprises", estado: "Enviado", total: 44990 },
-  { numero: "SO1006", fecha: "2026-09-05", cliente: "Camila Fuenzalida", estado: "Pendiente", total: 25980 }
-];
-
 // regiones con sus comunas
 const regiones = [
   { codigo: "15", nombre: "Arica y Parinacota", comunas: ["Arica", "Camarones", "Putre", "General Lagos"] },
@@ -198,7 +177,6 @@ const regiones = [
   { codigo: "12", nombre: "Magallanes y de la Antártica Chilena", comunas: ["Punta Arenas", "Puerto Natales", "Porvenir", "Cabo de Hornos"] }
 ];
 
-
 // ---------- localStorage ----------
 
 function guardarEnStorage(clave, valor) {
@@ -213,25 +191,19 @@ function leerDeStorage(clave, porDefecto) {
   return JSON.parse(texto);
 }
 
-// copia la lista para no tocar los datos originales
-function copiarLista(lista) {
-  return JSON.parse(JSON.stringify(lista));
-}
-
-
 // ---------- productos ----------
 
 function obtenerProductos() {
-  return leerDeStorage(CLAVE_PRODUCTOS, copiarLista(productosIniciales));
+  return leerDeStorage(CLAVE_PRODUCTOS, productosIniciales);
 }
 
 function guardarProductos(lista) {
-  return guardarEnStorage(CLAVE_PRODUCTOS, lista);
+  guardarEnStorage(CLAVE_PRODUCTOS, lista);
 }
 
 function buscarProducto(id) {
-  let numero = Number(id);
-  let lista = obtenerProductos();
+  const numero = Number(id);
+  const lista = obtenerProductos();
   for (let i = 0; i < lista.length; i++) {
     if (lista[i].id === numero) {
       return lista[i];
@@ -239,21 +211,20 @@ function buscarProducto(id) {
   }
   return null;
 }
-
 
 // ---------- usuarios ----------
 
 function obtenerUsuarios() {
-  return leerDeStorage(CLAVE_USUARIOS, copiarLista(usuariosIniciales));
+  return leerDeStorage(CLAVE_USUARIOS, usuariosIniciales);
 }
 
 function guardarUsuarios(lista) {
-  return guardarEnStorage(CLAVE_USUARIOS, lista);
+  guardarEnStorage(CLAVE_USUARIOS, lista);
 }
 
 function buscarUsuario(id) {
-  let numero = Number(id);
-  let lista = obtenerUsuarios();
+  const numero = Number(id);
+  const lista = obtenerUsuarios();
   for (let i = 0; i < lista.length; i++) {
     if (lista[i].id === numero) {
       return lista[i];
@@ -262,7 +233,6 @@ function buscarUsuario(id) {
   return null;
 }
 
-// el id nuevo es el mas alto + 1
 function siguienteId(lista) {
   let mayor = 0;
   for (let i = 0; i < lista.length; i++) {
@@ -272,7 +242,6 @@ function siguienteId(lista) {
   }
   return mayor + 1;
 }
-
 
 // ---------- regiones ----------
 
@@ -294,22 +263,16 @@ function nombreDeRegion(codigo) {
   return "";
 }
 
-
-// ---------- varios ----------
+// ---------- utilidades ----------
 
 function formatearPrecio(valor) {
-  let numero = Number(valor);
+  const numero = Number(valor);
   if (!numero) {
-    return "Gratis";
+    return "$0";
   }
-  return numero.toLocaleString("es-CL", {
-    style: "currency",
-    currency: "CLP",
-    maximumFractionDigits: 0
-  });
+  return "$" + numero.toLocaleString("es-CL");
 }
 
-// lee el id de la url, por ejemplo detalle-producto.html?id=3
 function obtenerParametro(nombre) {
   const partes = window.location.search.replace("?", "").split("&");
   for (let i = 0; i < partes.length; i++) {
@@ -321,32 +284,18 @@ function obtenerParametro(nombre) {
   return null;
 }
 
-// las paginas de pages/ tienen "../" en el body
 function raizSitio() {
   return document.body.getAttribute("data-raiz") || "";
 }
 
-// escapa el texto antes de meterlo con innerHTML
-function escaparTexto(texto) {
-  let salida = String(texto);
-  salida = salida.split("&").join("&amp;");
-  salida = salida.split("<").join("&lt;");
-  salida = salida.split(">").join("&gt;");
-  salida = salida.split('"').join("&quot;");
-  return salida;
-}
-
-// mensaje verde o rojo de aviso
 function mostrarAviso(mensaje, esError) {
-  let zona = document.querySelector("[data-anuncio]");
+  const zona = document.querySelector("[data-anuncio]");
   if (!zona) {
+    alert(mensaje);
     return;
   }
-  if (esError) {
-    zona.className = "aviso aviso--alerta";
-  } else {
-    zona.className = "aviso";
-  }
+  zona.className = esError ? "aviso aviso--alerta" : "aviso";
   zona.textContent = mensaje;
   zona.hidden = false;
 }
+

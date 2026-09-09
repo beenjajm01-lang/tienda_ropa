@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Camiseta Visita Cal">
-  <rect width="400" height="400" fill="#f3f6f0"/>
-  <path d="M140 90 L110 110 L90 160 L125 180 L130 160 L130 320 L270 320 L270 160 L275 180 L310 160 L290 110 L260 90 L230 105 A40 28 0 0 1 170 105 Z" fill="#f3f6f0"/>
-  <path d="M130 160 L200 320 L245 320 L160 145 Z" fill="#2f7a06" opacity="0.85"/>
-  <text x="200" y="255" font-family="system-ui, sans-serif" font-size="72" font-weight="800" fill="#ffffff" text-anchor="middle">4</text>
-</svg>

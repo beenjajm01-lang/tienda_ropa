@@ -1,67 +1,53 @@
-// productos.js - muestra el catalogo, el detalle y el carrito
-
-// texto y color segun el stock que queda
-function textoStock(producto) {
-  if (producto.stock <= 0) {
-    return { texto: "Sin stock", clase: "caluga__stock caluga__stock--agotado" };
-  }
-  if (producto.stockCritico !== "" && producto.stock <= producto.stockCritico) {
-    return { texto: "Últimas " + producto.stock + " unidades", clase: "caluga__stock caluga__stock--critico" };
-  }
-  return { texto: producto.stock + " disponibles", clase: "caluga__stock" };
-}
+// productos.js - renderizado de catalogo, detalle y carrito
 
 function htmlProducto(producto) {
-  const stock = textoStock(producto);
-  const imagen = raizSitio() + "images/" + escaparTexto(producto.imagen);
-  const nombre = escaparTexto(producto.nombre);
+  const imagen = raizSitio() + "images/" + producto.imagen;
+  let boton = `<button class="boton boton--principal boton--ancho boton--pequeno" type="button" data-agregar="${producto.id}">Agregar al carrito</button>`;
 
-  let boton;
   if (producto.stock <= 0) {
-    boton = '<button class="boton boton--principal boton--ancho boton--pequeno" type="button" disabled>Sin stock</button>';
-  } else {
-    boton = '<button class="boton boton--principal boton--ancho boton--pequeno" type="button" data-agregar="' + producto.id + '">Agregar al carrito</button>';
+    boton = `<button class="boton boton--principal boton--ancho boton--pequeno" type="button" disabled>Sin stock</button>`;
   }
 
-  let html = '<article class="caluga">';
-  html += '<figure class="caluga__figura"><img src="' + imagen + '" alt="' + nombre + '" width="400" height="400"></figure>';
-  html += '<div class="caluga__cuerpo">';
-  html += '<p class="caluga__categoria">' + escaparTexto(producto.categoria) + '</p>';
-  html += '<h3 class="caluga__nombre"><a href="detalle-producto.html?id=' + producto.id + '">' + nombre + '</a></h3>';
-  html += '<p class="caluga__precio">' + formatearPrecio(producto.precio) + '</p>';
-  html += '<p class="' + stock.clase + '">' + stock.texto + '</p>';
-  html += '</div>';
-  html += '<div class="caluga__acciones">' + boton + '</div>';
-  html += '</article>';
-  return html;
+  return `
+    <article class="caluga">
+      <figure class="caluga__figura">
+        <img src="${imagen}" alt="${producto.nombre}" width="400" height="400">
+      </figure>
+      <div class="caluga__cuerpo">
+        <p class="caluga__categoria">${producto.categoria}</p>
+        <h3 class="caluga__nombre">
+          <a href="detalle-producto.html?id=${producto.id}">${producto.nombre}</a>
+        </h3>
+        <p class="caluga__precio">${formatearPrecio(producto.precio)}</p>
+        <p class="caluga__stock">${producto.stock} disponibles</p>
+      </div>
+      <div class="caluga__acciones">${boton}</div>
+    </article>
+  `;
 }
 
 function pintarProductos(contenedor, lista) {
   let html = "";
   for (let i = 0; i < lista.length; i++) {
-    html = html + htmlProducto(lista[i]);
+    html += htmlProducto(lista[i]);
   }
   contenedor.innerHTML = html;
 }
 
-// un solo click para todas las tarjetas
 function conectarBotonesAgregar(contenedor) {
   contenedor.addEventListener("click", function (evento) {
     const boton = evento.target.closest("[data-agregar]");
-    if (!boton) {
-      return;
-    }
-    const resultado = agregarAlCarrito(Number(boton.dataset.agregar), 1);
+    if (!boton) return;
+
+    const id = Number(boton.dataset.agregar);
+    const resultado = agregarAlCarrito(id, 1);
     mostrarAviso(resultado.mensaje, !resultado.ok);
   });
 }
 
-// los 4 destacados del home
 function iniciarDestacados() {
   const contenedor = document.querySelector("[data-destacados]");
-  if (!contenedor) {
-    return;
-  }
+  if (!contenedor) return;
 
   const todos = obtenerProductos();
   const primeros = [];
@@ -75,132 +61,138 @@ function iniciarDestacados() {
 
 function iniciarCatalogo() {
   const contenedor = document.querySelector("[data-catalogo]");
-  if (!contenedor) {
-    return;
-  }
+  if (!contenedor) return;
+
   pintarProductos(contenedor, obtenerProductos());
   conectarBotonesAgregar(contenedor);
 }
 
 function iniciarDetalle() {
   const zona = document.querySelector("[data-detalle]");
-  if (!zona) {
-    return;
-  }
+  if (!zona) return;
 
   const producto = buscarProducto(obtenerParametro("id"));
 
   if (!producto) {
-    zona.innerHTML = '<div class="vacio"><h2>No encontramos ese producto</h2>' +
-      '<a class="boton boton--principal" href="productos.html">Ver todos los productos</a></div>';
+    zona.innerHTML = `
+      <div class="vacio">
+        <h2>No encontramos ese producto</h2>
+        <a class="boton boton--principal" href="productos.html">Ver todos los productos</a>
+      </div>
+    `;
     return;
   }
 
   document.title = producto.nombre + " · ChileGol Store";
-  document.querySelector("[data-miga-producto]").textContent = producto.nombre;
-  document.querySelector("[data-campo=nombre]").textContent = producto.nombre;
-  document.querySelector("[data-campo=precio]").textContent = formatearPrecio(producto.precio);
-  document.querySelector("[data-campo=codigo]").textContent = producto.codigo;
-  document.querySelector("[data-campo=categoria]").textContent = producto.categoria;
-  document.querySelector("[data-campo=stock]").textContent = textoStock(producto).texto;
+  const campoNombre = document.querySelector("[data-campo=nombre]");
+  if (campoNombre) campoNombre.textContent = producto.nombre;
 
-  if (producto.descripcion) {
-    document.querySelector("[data-campo=descripcion]").textContent = producto.descripcion;
-  } else {
-    document.querySelector("[data-campo=descripcion]").textContent = "Sin descripción.";
-  }
+  const campoPrecio = document.querySelector("[data-campo=precio]");
+  if (campoPrecio) campoPrecio.textContent = formatearPrecio(producto.precio);
+
+  const campoCodigo = document.querySelector("[data-campo=codigo]");
+  if (campoCodigo) campoCodigo.textContent = producto.codigo;
+
+  const campoCategoria = document.querySelector("[data-campo=categoria]");
+  if (campoCategoria) campoCategoria.textContent = producto.categoria;
+
+  const campoStock = document.querySelector("[data-campo=stock]");
+  if (campoStock) campoStock.textContent = producto.stock + " disponibles";
+
+  const campoDesc = document.querySelector("[data-campo=descripcion]");
+  if (campoDesc) campoDesc.textContent = producto.descripcion || "Sin descripción.";
 
   const imagen = document.querySelector("[data-campo=imagen]");
-  imagen.src = raizSitio() + "images/" + producto.imagen;
-  imagen.alt = producto.nombre;
+  if (imagen) {
+    imagen.src = raizSitio() + "images/" + producto.imagen;
+    imagen.alt = producto.nombre;
+  }
 
   const cantidad = document.getElementById("cantidad");
   const boton = document.querySelector("[data-agregar-detalle]");
 
-  if (producto.stock <= 0) {
-    boton.disabled = true;
-    boton.textContent = "Sin stock";
-    cantidad.disabled = true;
-  } else {
-    cantidad.max = producto.stock;
+  if (boton) {
+    if (producto.stock <= 0) {
+      boton.disabled = true;
+      boton.textContent = "Sin stock";
+      if (cantidad) cantidad.disabled = true;
+    } else {
+      boton.addEventListener("click", function () {
+        const cantValor = cantidad ? cantidad.value : 1;
+        const resultado = agregarAlCarrito(producto.id, cantValor);
+        mostrarAviso(resultado.mensaje, !resultado.ok);
+      });
+    }
   }
-
-  boton.addEventListener("click", function () {
-    const resultado = agregarAlCarrito(producto.id, cantidad.value);
-    mostrarAviso(resultado.mensaje, !resultado.ok);
-  });
 }
 
 function htmlLineaCarrito(item) {
-  const producto = buscarProducto(item.id);
-  let tope = item.cantidad;
-  if (producto) {
-    tope = producto.stock;
-  }
-
-  const nombre = escaparTexto(item.nombre);
-  const imagen = raizSitio() + "images/" + escaparTexto(item.imagen);
-
-  let masApagado = "";
-  if (item.cantidad >= tope) {
-    masApagado = " disabled";
-  }
-
-  let html = '<article class="linea">';
-  html += '<figure class="linea__figura"><img src="' + imagen + '" alt="' + nombre + '" width="110" height="110"></figure>';
-  html += '<div class="linea__cuerpo">';
-  html += '<h3 class="linea__nombre">' + nombre + '</h3>';
-  html += '<p class="linea__precio">' + formatearPrecio(item.precio) + ' c/u</p>';
-  html += '<p class="linea__subtotal">Subtotal: ' + formatearPrecio(item.precio * item.cantidad) + '</p>';
-  html += '<div class="cantidad">';
-  html += '<button type="button" data-menos="' + item.id + '" aria-label="Quitar una unidad de ' + nombre + '">−</button>';
-  html += '<output>' + item.cantidad + '</output>';
-  html += '<button type="button" data-mas="' + item.id + '" aria-label="Agregar una unidad de ' + nombre + '"' + masApagado + '>+</button>';
-  html += '</div></div>';
-  html += '<button class="boton boton--peligro boton--pequeno" type="button" data-quitar="' + item.id + '">Quitar</button>';
-  html += '</article>';
-  return html;
+  const imagen = raizSitio() + "images/" + item.imagen;
+  return `
+    <article class="linea">
+      <figure class="linea__figura">
+        <img src="${imagen}" alt="${item.nombre}" width="110" height="110">
+      </figure>
+      <div class="linea__cuerpo">
+        <h3 class="linea__nombre">${item.nombre}</h3>
+        <p class="linea__precio">${formatearPrecio(item.precio)} c/u</p>
+        <p class="linea__subtotal">Subtotal: ${formatearPrecio(item.precio * item.cantidad)}</p>
+        <div class="cantidad">
+          <button type="button" data-menos="${item.id}">−</button>
+          <output>${item.cantidad}</output>
+          <button type="button" data-mas="${item.id}">+</button>
+        </div>
+      </div>
+      <button class="boton boton--peligro boton--pequeno" type="button" data-quitar="${item.id}">Quitar</button>
+    </article>
+  `;
 }
 
 function pintarCarrito() {
   const lista = document.querySelector("[data-carrito-lista]");
-  if (!lista) {
-    return;
-  }
+  if (!lista) return;
 
   const items = leerCarrito();
 
   if (items.length === 0) {
-    lista.innerHTML = '<div class="vacio"><h2>Tu carrito está vacío</h2>' +
-      '<a class="boton boton--principal" href="productos.html">Ir al catálogo</a></div>';
+    lista.innerHTML = `
+      <div class="vacio">
+        <h2>Tu carrito está vacío</h2>
+        <a class="boton boton--principal" href="productos.html">Ir al catálogo</a>
+      </div>
+    `;
   } else {
     let html = "";
     for (let i = 0; i < items.length; i++) {
-      html = html + htmlLineaCarrito(items[i]);
+      html += htmlLineaCarrito(items[i]);
     }
     lista.innerHTML = html;
   }
 
   const total = calcularTotal();
   const resumen = document.querySelector("[data-carrito-resumen]");
-  let htmlResumen = "<h2>Resumen</h2>";
-  htmlResumen += '<div class="resumen__fila"><span>' + contarCarrito() + ' unidades</span><span>' + formatearPrecio(total) + '</span></div>';
-  htmlResumen += '<div class="resumen__total"><span>Total</span><span>' + formatearPrecio(total) + '</span></div>';
-  if (items.length === 0) {
-    htmlResumen += '<button class="boton boton--principal boton--ancho" type="button" data-pagar disabled>Pagar</button>';
-  } else {
-    htmlResumen += '<button class="boton boton--principal boton--ancho" type="button" data-pagar>Pagar</button>';
+  if (resumen) {
+    resumen.innerHTML = `
+      <h2>Resumen</h2>
+      <div class="resumen__fila">
+        <span>${contarCarrito()} unidades</span>
+        <span>${formatearPrecio(total)}</span>
+      </div>
+      <div class="resumen__total">
+        <span>Total</span>
+        <span>${formatearPrecio(total)}</span>
+      </div>
+      <button class="boton boton--principal boton--ancho" type="button" data-pagar ${items.length === 0 ? "disabled" : ""}>
+        Pagar
+      </button>
+    `;
   }
-  resumen.innerHTML = htmlResumen;
 }
 
 function iniciarCarrito() {
   const lista = document.querySelector("[data-carrito-lista]");
-  if (!lista) {
-    return;
-  }
+  if (!lista) return;
 
-  // los botones se crean con innerHTML, por eso escucho el click en el padre
   lista.addEventListener("click", function (evento) {
     const menos = evento.target.closest("[data-menos]");
     if (menos) {
@@ -223,19 +215,23 @@ function iniciarCarrito() {
     }
   });
 
-  document.querySelector("[data-carrito-resumen]").addEventListener("click", function (evento) {
-    if (!evento.target.closest("[data-pagar]")) {
-      return;
-    }
-    mostrarAviso("Pago simulado por " + formatearPrecio(calcularTotal()) + ".");
-    vaciarCarrito();
-    pintarCarrito();
-  });
+  const resumen = document.querySelector("[data-carrito-resumen]");
+  if (resumen) {
+    resumen.addEventListener("click", function (evento) {
+      if (!evento.target.closest("[data-pagar]")) return;
+      alert("Pago simulado por " + formatearPrecio(calcularTotal()) + ". ¡Gracias por tu compra!");
+      vaciarCarrito();
+      pintarCarrito();
+    });
+  }
 
-  document.querySelector("[data-vaciar]").addEventListener("click", function () {
-    vaciarCarrito();
-    pintarCarrito();
-  });
+  const btnVaciar = document.querySelector("[data-vaciar]");
+  if (btnVaciar) {
+    btnVaciar.addEventListener("click", function () {
+      vaciarCarrito();
+      pintarCarrito();
+    });
+  }
 
   pintarCarrito();
 }

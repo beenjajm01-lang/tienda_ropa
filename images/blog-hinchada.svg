@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Hinchada">
-  <rect width="640" height="360" fill="#a4231b"/>
-  <path d="M0 360 L640 0 L640 120 L210 360 Z" fill="#ffffff" opacity="0.12"/>
-  <circle cx="520" cy="90" r="52" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.5"/>
-</svg>
