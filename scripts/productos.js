@@ -2,6 +2,7 @@
 
 function htmlProducto(producto) {
   const imagen = raizSitio() + "images/" + producto.imagen;
+  const enlaceDetalle = raizSitio() + "pages/detalle-producto.html?id=" + producto.id;
   let boton = `<button class="boton boton--principal boton--ancho boton--pequeno" type="button" data-agregar="${producto.id}">Agregar al carrito</button>`;
 
   if (producto.stock <= 0) {
@@ -16,7 +17,7 @@ function htmlProducto(producto) {
       <div class="caluga__cuerpo">
         <p class="caluga__categoria">${producto.categoria}</p>
         <h3 class="caluga__nombre">
-          <a href="detalle-producto.html?id=${producto.id}">${producto.nombre}</a>
+          <a href="${enlaceDetalle}">${producto.nombre}</a>
         </h3>
         <p class="caluga__precio">${formatearPrecio(producto.precio)}</p>
         <p class="caluga__stock">${producto.stock} disponibles</p>
@@ -77,7 +78,7 @@ function iniciarDetalle() {
     zona.innerHTML = `
       <div class="vacio">
         <h2>No encontramos ese producto</h2>
-        <a class="boton boton--principal" href="productos.html">Ver todos los productos</a>
+        <a class="boton boton--principal" href="${raizSitio()}pages/productos.html">Ver todos los productos</a>
       </div>
     `;
     return;
@@ -158,7 +159,7 @@ function pintarCarrito() {
     lista.innerHTML = `
       <div class="vacio">
         <h2>Tu carrito está vacío</h2>
-        <a class="boton boton--principal" href="productos.html">Ir al catálogo</a>
+        <a class="boton boton--principal" href="${raizSitio()}pages/productos.html">Ir al catálogo</a>
       </div>
     `;
   } else {
