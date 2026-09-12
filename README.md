@@ -5,8 +5,8 @@ Proyecto desarrollado para la asignatura Desarrollo Fullstack II de Duoc UC.
 La aplicación corresponde a una tienda online enfocada en ropa y camisetas de equipos del fútbol chileno, inicialmente de clubes de Primera División.
 
 ## Integrantes
-Vicente Saez 
-Benjamín Pizarro
+1. Vicente Saez 
+2. Benjamín Pizarro
 
 ## Asignatura
 
