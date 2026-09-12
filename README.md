@@ -1,4 +1,4 @@
-# Tienda Fútbol Chileno
+# Tienda de Ropa deportiva de Fútbol Chileno
 
 Proyecto desarrollado para la asignatura Desarrollo Fullstack II de Duoc UC.
 
