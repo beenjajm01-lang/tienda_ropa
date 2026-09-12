@@ -6,7 +6,6 @@ La aplicación corresponde a una tienda online enfocada en ropa y camisetas de e
 
 ## Integrantes
 Vicente Saez
-
 Benjamín Pizarro
 
 ## Asignatura
