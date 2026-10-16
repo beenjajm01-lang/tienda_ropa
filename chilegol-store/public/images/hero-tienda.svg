@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Camisetas colgadas en una tienda">
+  <rect width="800" height="560" fill="#10201a"/>
+  <path d="M0 560 L800 0 L800 200 L260 560 Z" fill="#2f7a06" opacity="0.55"/>
+  <path d="M0 560 L620 0 L800 0 L120 560 Z" fill="#4dc001" opacity="0.18"/>
+  <g fill="none" stroke="#f3f6f0" stroke-width="2" opacity="0.35">
+    <circle cx="400" cy="280" r="120"/>
+    <path d="M400 160 L400 400 M280 280 L520 280"/>
+  </g>
+</svg>

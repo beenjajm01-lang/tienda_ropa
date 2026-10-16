@@ -1,0 +1,661 @@
+/* ============================================================
+   ChileGol Store - estilos propios
+   Bootstrap hace casi todo el trabajo; aquí solo cambio colores,
+   tipografías y algunos detalles de la tienda.
+   ============================================================ */
+
+/* ---------- 1. Colores y tipografías (variables) ---------- */
+:root {
+  --cg-azul: #0b1f4b;        /* azul marino: navbar, footer, títulos */
+  --cg-azul-medio: #0039a6;  /* azul bandera: enlaces y foco */
+  --cg-rojo: #d52b1e;        /* rojo bandera: botones de acción y ofertas */
+  --cg-rojo-oscuro: #ad2015;
+  --cg-tiza: #f3f5f9;        /* fondo general, gris muy claro */
+  --cg-linea: #dfe4ec;       /* bordes */
+  --cg-grada: #5b6474;       /* texto secundario */
+  --cg-tinta: #14213d;       /* texto principal */
+
+  --cg-fuente-titulos: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+  --cg-fuente-texto: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --bs-body-font-family: var(--cg-fuente-texto);
+  --bs-body-color: var(--cg-tinta);
+  --bs-body-bg: #fff; /* fondo de inputs y tarjetas de Bootstrap */
+  --bs-link-color: var(--cg-azul-medio);
+  --bs-link-color-rgb: 0, 57, 166;
+  --bs-link-hover-color: var(--cg-azul);
+  --bs-border-color: var(--cg-linea);
+  --bs-border-radius: 0.5rem;
+}
+
+body {
+  background: var(--cg-tiza);
+  min-height: 100vh;
+}
+
+h1, h2, h3, .font-titulo {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--cg-azul);
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); }
+h3 { font-size: 1.5rem; }
+
+.texto-secundario { color: var(--cg-grada); }
+
+/* Foco visible para quien navega con teclado */
+:focus-visible {
+  outline: 3px solid var(--cg-azul-medio);
+  outline-offset: 2px;
+}
+
+/* ---------- 2. Botones de Bootstrap con los colores de la tienda ---------- */
+.btn-primary {
+  --bs-btn-bg: var(--cg-rojo);
+  --bs-btn-border-color: var(--cg-rojo);
+  --bs-btn-hover-bg: var(--cg-rojo-oscuro);
+  --bs-btn-hover-border-color: var(--cg-rojo-oscuro);
+  --bs-btn-active-bg: var(--cg-rojo-oscuro);
+  --bs-btn-active-border-color: var(--cg-rojo-oscuro);
+  --bs-btn-disabled-bg: #c9ced8;
+  --bs-btn-disabled-border-color: #c9ced8;
+  --bs-btn-focus-shadow-rgb: 213, 43, 30;
+  font-weight: 600;
+}
+
+.btn-dark {
+  --bs-btn-bg: var(--cg-azul);
+  --bs-btn-border-color: var(--cg-azul);
+  --bs-btn-hover-bg: #13306e;
+  --bs-btn-hover-border-color: #13306e;
+  --bs-btn-active-bg: #13306e;
+  font-weight: 600;
+}
+
+.btn-outline-dark {
+  --bs-btn-color: var(--cg-azul);
+  --bs-btn-border-color: var(--cg-azul);
+  --bs-btn-hover-bg: var(--cg-azul);
+  --bs-btn-hover-border-color: var(--cg-azul);
+  --bs-btn-active-bg: var(--cg-azul);
+  font-weight: 600;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: var(--cg-azul-medio);
+  box-shadow: 0 0 0 0.2rem rgba(0, 57, 166, 0.2);
+}
+
+.form-check-input:checked {
+  background-color: var(--cg-azul);
+  border-color: var(--cg-azul);
+}
+
+/* ---------- 3. Navbar ---------- */
+.cg-navbar {
+  background: var(--cg-azul);
+}
+
+.cg-marca {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 900;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cg-marca:hover { color: #fff; }
+
+.cg-marca img { width: 30px; height: 30px; }
+
+.cg-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 3px solid transparent;
+}
+
+.cg-navbar .nav-link:hover { color: #fff; }
+
+.cg-navbar .nav-link.active {
+  color: #fff;
+  border-bottom-color: var(--cg-rojo);
+}
+
+.cg-navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.cg-carrito-btn {
+  position: relative;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  padding: 0.35rem 0.5rem;
+}
+
+.cg-carrito-btn:hover { color: #fff; }
+
+.cg-carrito-btn .badge {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  background: var(--cg-rojo);
+  font-size: 0.7rem;
+}
+
+/* ---------- 4. Carrusel de la portada ---------- */
+.cg-hero {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+.cg-slide {
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  padding: 3rem 0 4rem;
+}
+
+.cg-slide--azul { background: var(--cg-azul); }
+/* Portada de la versión 1: cancha verde (hero-tienda.svg) */
+.cg-slide--cancha { background: #10201a url('/images/hero-tienda.svg') center / cover no-repeat; }
+.cg-slide--rojo { background: var(--cg-rojo); }
+.cg-slide--blanco { background: #fff; color: var(--cg-azul); }
+
+.cg-slide__titulo {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 900;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.88;
+  color: inherit;
+  margin-bottom: 1rem;
+}
+
+.cg-slide__texto {
+  font-size: 1.15rem;
+  max-width: 34ch;
+  opacity: 0.92;
+}
+
+.cg-slide__camiseta {
+  width: min(360px, 55%);
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.25));
+}
+
+.cg-hero__controles {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.25rem;
+}
+
+.cg-hero__indicador {
+  color: inherit;
+  width: 34px;
+  height: 5px;
+  border: 0;
+  padding: 0;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.cg-hero__indicador.activo { opacity: 1; }
+
+.cg-hero__flecha {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  background: transparent;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fotos (por ejemplo, la portada de Huevito Rey) */
+.cg-slide__foto {
+  width: min(300px, 70%);
+  border-radius: 1rem;
+  transform: rotate(-3deg);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 768px) {
+  .cg-slide__camiseta { width: min(360px, 80%); }
+  .cg-slide__foto { width: min(340px, 85%); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cg-slide { animation: cg-entrada 0.45s ease-out; }
+}
+
+@keyframes cg-entrada {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* ---------- 5. Tarjeta de producto ---------- */
+.producto-card {
+  border: 1px solid var(--cg-linea);
+  border-radius: 0.75rem;
+  background: #fff;
+  height: 100%;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.producto-card:hover { border-color: #b9c2d3; }
+
+.producto-card__imagen {
+  position: relative;
+  display: block;
+  background: #e9edf4;
+  aspect-ratio: 1 / 1;
+  padding: 1.25rem;
+}
+
+.producto-card__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Las fotos llenan todo el recuadro; las ilustraciones SVG llevan margen */
+.producto-card__imagen--foto { padding: 0; }
+.producto-card__imagen--foto img { object-fit: cover; }
+
+.producto-card__descuento {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--cg-rojo);
+  color: #fff;
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 0.35rem;
+}
+
+.producto-card__nombre {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cg-tinta);
+  text-decoration: none;
+}
+
+.producto-card__nombre:hover { color: var(--cg-azul-medio); }
+
+.producto-card__categoria {
+  font-size: 0.85rem;
+  color: var(--cg-grada);
+}
+
+/* Precio con la tipografía de marcador */
+.precio {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--cg-azul);
+}
+
+.precio--oferta { color: var(--cg-rojo); }
+
+.precio-anterior {
+  color: var(--cg-grada);
+  text-decoration: line-through;
+  font-size: 0.95rem;
+}
+
+.stock-bajo {
+  color: var(--cg-rojo);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ---------- 6. Categorías (como un lienzo de barra) ---------- */
+.categoria-tile {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  background: #fff;
+  border: 2px solid var(--cg-linea);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  padding: 0;
+  color: var(--cg-tinta);
+  text-decoration: none;
+}
+
+.categoria-tile:hover { border-color: #b9c2d3; color: var(--cg-tinta); }
+
+.categoria-tile.seleccionada { border-color: var(--cg-azul); }
+
+.categoria-tile__colores {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.categoria-tile__colores span {
+  width: 12px;
+}
+
+.categoria-tile__texto {
+  padding: 0.9rem 1rem;
+}
+
+.categoria-tile__nombre {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 800;
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--cg-azul);
+  display: block;
+}
+
+/* ---------- 7. Secciones generales ---------- */
+.seccion {
+  padding: 3rem 0;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid var(--cg-linea);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.cabecera-pagina {
+  background: #fff;
+  border-bottom: 1px solid var(--cg-linea);
+  padding: 2.25rem 0 1.75rem;
+}
+
+.cabecera-pagina p { margin: 0.5rem 0 0; color: var(--cg-grada); }
+
+.franja-beneficios {
+  background: #fff;
+  border-top: 1px solid var(--cg-linea);
+  border-bottom: 1px solid var(--cg-linea);
+}
+
+.franja-beneficios i {
+  font-size: 1.6rem;
+  color: var(--cg-rojo);
+}
+
+/* ---------- 8. Detalle de producto ---------- */
+.detalle-imagen {
+  background: #e9edf4;
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+.detalle-imagen img { width: 100%; max-height: 460px; object-fit: contain; }
+
+.detalle-imagen--foto { padding: 0; overflow: hidden; }
+.detalle-imagen--foto img { max-height: none; aspect-ratio: 1 / 1; object-fit: cover; display: block; }
+
+/* Miniaturas con foto (carrito, resumen y tablas del admin) */
+.img-foto { padding: 0 !important; object-fit: cover !important; }
+
+.selector-talla .btn {
+  min-width: 52px;
+  font-weight: 600;
+}
+
+.selector-talla .btn-check:checked + .btn {
+  background: var(--cg-azul);
+  border-color: var(--cg-azul);
+  color: #fff;
+}
+
+/* ---------- 9. Carrito ---------- */
+.cart-item {
+  background: #fff;
+  border: 1px solid var(--cg-linea);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.cart-item__imagen {
+  width: 84px;
+  height: 84px;
+  background: #e9edf4;
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+  object-fit: contain;
+}
+
+.cantidad {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--cg-linea);
+  border-radius: 0.5rem;
+}
+
+.cantidad .btn { border: 0; }
+
+.cantidad__valor {
+  min-width: 2.2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.resumen-total {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: var(--cg-azul);
+}
+
+/* ---------- 10. Checkout y resultado de compra ---------- */
+.checkout fieldset legend {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--cg-azul);
+}
+
+.resultado-compra__icono {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.resultado-compra--exito .resultado-compra__icono { color: #1d7a46; }
+.resultado-compra--fallo .resultado-compra__icono { color: var(--cg-rojo); }
+
+.numero-orden {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--cg-azul);
+}
+
+/* ---------- 11. Blog ---------- */
+.blog-card {
+  background: #fff;
+  border: 1px solid var(--cg-linea);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  height: 100%;
+}
+
+.blog-card__cabecera {
+  height: 10px;
+}
+
+.blog-articulo {
+  max-width: 70ch;
+}
+
+.blog-articulo p {
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+/* ---------- 12. Footer ---------- */
+.cg-footer {
+  background: var(--cg-azul);
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 4rem;
+}
+
+.cg-footer a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+.cg-footer a:hover { color: #fff; text-decoration: underline; }
+
+.cg-footer h2 {
+  color: #fff;
+  font-size: 1.35rem;
+}
+
+.cg-footer .redes a {
+  font-size: 1.3rem;
+  margin-right: 0.9rem;
+}
+
+.cg-footer__base {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ---------- 13. Panel administrativo ---------- */
+.admin {
+  min-height: 100vh;
+  background: var(--cg-tiza);
+}
+
+.admin-sidebar {
+  background: var(--cg-azul);
+  color: #fff;
+}
+
+.admin-sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.78);
+  border-left: 4px solid transparent;
+  padding: 0.65rem 1rem;
+  white-space: nowrap;
+}
+
+.admin-sidebar .nav-link:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+
+.admin-sidebar .nav-link.active {
+  color: #fff;
+  border-left-color: var(--cg-rojo);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-sidebar .nav-link i { width: 1.4rem; display: inline-block; }
+
+@media (min-width: 992px) {
+  .admin-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    flex-shrink: 0;
+  }
+}
+
+/* En celular el menú lateral pasa a ser una barra que se desliza */
+@media (max-width: 991.98px) {
+  .admin-sidebar .nav {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .admin-sidebar .nav-link {
+    border-left: 0;
+    border-bottom: 3px solid transparent;
+  }
+
+  .admin-sidebar .nav-link.active { border-bottom-color: var(--cg-rojo); }
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--cg-linea);
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  height: 100%;
+}
+
+.stat-card__valor {
+  font-family: var(--cg-fuente-titulos);
+  font-weight: 900;
+  font-size: 2.3rem;
+  line-height: 1;
+  color: var(--cg-azul);
+}
+
+.stat-card__nombre {
+  color: var(--cg-grada);
+  font-size: 0.92rem;
+}
+
+.tabla-admin {
+  --bs-table-bg: #fff;
+  margin-bottom: 0;
+}
+
+.tabla-admin thead th {
+  font-size: 0.85rem;
+  color: var(--cg-grada);
+  font-weight: 600;
+  background: #f7f8fb;
+}
+
+.tabla-admin img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  background: #e9edf4;
+  border-radius: 0.4rem;
+  padding: 0.2rem;
+}
+
+.barra-reporte {
+  height: 14px;
+  background: #e6eaf1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barra-reporte span {
+  display: block;
+  height: 100%;
+  background: var(--cg-azul-medio);
+}
+
+.barra-reporte--roja span { background: var(--cg-rojo); }
+
+/* Boleta imprimible */
+.boleta {
+  max-width: 560px;
+}
+
+@media print {
+  .no-imprimir { display: none !important; }
+  .admin-sidebar { display: none !important; }
+}
