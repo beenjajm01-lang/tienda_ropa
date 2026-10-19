@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getProductos } from './data/products';
 import { getSesion, cerrarSesion, refrescarSesion } from './data/users';
