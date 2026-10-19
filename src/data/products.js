@@ -1,4 +1,30 @@
+// Datos de productos y su CRUD en localStorage.
+
+import { leer, guardar, siguienteId } from './storage';
+
 const CLAVE_PRODUCTOS = "cgs_productos";
+
+// Categorías disponibles
+export const categorias = ["Camisetas", "Shorts", "Abrigo", "Accesorios"];
+
+// Imágenes disponibles en public/images
+export const imagenesDisponibles = [
+  "/images/goku-colocolo.webp",
+  "/images/goku-udechile.webp",
+  "/images/goku-ucatolica.webp",
+  "/images/goku-cobreloa.webp",
+  "/images/krilin-wanderers.webp",
+  "/images/vegeta-uespañola.webp",
+  "/images/piccolo-palestino.webp",
+  "/images/tenshinhan-ohiggins.webp",
+  "/images/camiseta-colo-colo.webp",
+  "/images/camiseta-universidad-de-chile.webp",
+  "/images/camiseta-universidad-catolica.webp",
+  "/images/camiseta-cobreloa.webp",
+];
+
+// Imagen por defecto
+export const IMAGEN_POR_DEFECTO = "/images/sin-imagen.svg";
 
 export const productosIniciales = [
   {
@@ -91,21 +117,97 @@ export const productosIniciales = [
   }
 ];
 
+
+
+
 export function getProductos() {
-  const guardados = localStorage.getItem(CLAVE_PRODUCTOS);
-  if (!guardados) {
-    localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(productosIniciales));
-    return productosIniciales;
+  const guardados = leer(CLAVE_PRODUCTOS, null);
+  if (!Array.isArray(guardados)) {
+    // primera vez: guardo los iniciales
+    guardar(CLAVE_PRODUCTOS, productosIniciales);
+    return [...productosIniciales];
   }
-  return JSON.parse(guardados);
+  return guardados;
 }
 
 export function getProductoPorId(id) {
-  const lista = getProductos();
-  return lista.find((p) => p.id === Number(id)) || null;
+  return getProductos().find((p) => p.id === Number(id)) || null;
 }
+
+// true si el stock está en o bajo el umbral crítico
+export function estaEnStockCritico(producto) {
+  return producto.stockCritico !== "" && producto.stockCritico != null && producto.stock <= producto.stockCritico;
+}
+
+export function getProductosCriticos() {
+  return getProductos().filter(estaEnStockCritico);
+}
+
+// true si el código ya existe; idIgnorado se omite al editar
+export function existeCodigo(codigo, idIgnorado = null) {
+  const buscado = String(codigo).trim().toUpperCase();
+  return getProductos().some((p) => p.codigo.toUpperCase() === buscado && p.id !== idIgnorado);
+}
+
+
+
 
 export function saveProductos(lista) {
-  localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(lista));
+  guardar(CLAVE_PRODUCTOS, lista);
 }
 
+// Convierte y limpia los datos del formulario
+function normalizar(datos) {
+  const critico = String(datos.stockCritico ?? "").trim();
+  const imagen = String(datos.imagen ?? "").trim();
+  return {
+    codigo: String(datos.codigo).trim().toUpperCase(),
+    nombre: String(datos.nombre).trim(),
+    descripcion: String(datos.descripcion ?? "").trim(),
+    precio: Number(datos.precio),
+    stock: parseInt(datos.stock, 10),
+    stockCritico: critico === "" ? "" : parseInt(critico, 10),
+    categoria: datos.categoria,
+    imagen: imagen === "" ? IMAGEN_POR_DEFECTO : imagen,
+  };
+}
+
+
+
+
+export function crearProducto(datos) {
+  const lista = getProductos();
+  const nuevo = { id: siguienteId(lista), ...normalizar(datos) };
+  saveProductos([...lista, nuevo]);
+  return nuevo;
+}
+
+
+
+
+export function actualizarProducto(id, datos) {
+  const lista = getProductos();
+  const numero = Number(id);
+  const existente = lista.find((p) => p.id === numero);
+  if (!existente) {
+    return null;
+  }
+  const actualizado = { ...existente, ...normalizar({ ...existente, ...datos }), id: numero };
+  saveProductos(lista.map((p) => (p.id === numero ? actualizado : p)));
+  return actualizado;
+}
+
+
+
+
+export function eliminarProducto(id) {
+  const quedan = getProductos().filter((p) => p.id !== Number(id));
+  saveProductos(quedan);
+  return quedan;
+}
+
+// Restaura los productos iniciales
+export function restablecerProductos() {
+  saveProductos(productosIniciales);
+  return [...productosIniciales];
+}

@@ -1,74 +1,73 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+// Formulario de contacto (nombre, correo y mensaje con contador).
+
+import { useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import Button from '../components/atoms/Button';
+import Input from '../components/atoms/Input';
+import FormGroup from '../components/molecules/FormGroup';
+import logoCgs from '../assets/logo-cgs.svg';
+import {
+  DOMINIOS_PERMITIDOS,
+  LARGO_MAXIMO_COMENTARIO,
+  validarNombre,
+  validarCorreo,
+  validarComentario,
+} from '../utils/validaciones';
 
 export default function Contact() {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const [enviado, setEnviado] = useState(false);
+  const { register, handleSubmit, reset, control, formState: { errors } } = useForm({
+    defaultValues: { nombre: '', correo: '', comentario: '' },
+  });
+  const [enviado, setEnviado] = useState(null);
 
-  const onSubmit = () => {
-    setEnviado(true);
+  // Contador de caracteres del mensaje
+  const comentario = useWatch({ control, name: 'comentario' }) ?? '';
+
+  const onSubmit = (datos) => {
+    setEnviado({ nombre: datos.nombre.trim(), correo: datos.correo.trim() });
     reset();
   };
 
   return (
-    <main className="seccion">
+    <main id="contenido" className="acceso">
       <div className="contenedor">
-        <h1 className="seccion__titulo">Contacto</h1>
-        <p className="seccion__bajada">¿Tienes alguna duda o consulta? Escríbenos y te responderemos a la brevedad.</p>
+        <div className="acceso__marca">
+          <img src={logoCgs} alt="" width="64" height="64" />
+          <h1>Escríbenos</h1>
+          <p className="prosa">Respondemos de lunes a viernes, entre 9:00 y 18:00.</p>
+        </div>
 
-        {enviado && (
-          <div className="aviso su-20 mb-4">
-            Mensaje enviado con éxito. Te responderemos pronto.
-          </div>
-        )}
-
-        <form className="formulario" onSubmit={handleSubmit(onSubmit)}>
+        <form className="formulario" onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="formulario__cabecera">
-            <h2>Formulario de Mensaje</h2>
+            <h2>Formulario de contacto</h2>
           </div>
+
           <div className="formulario__cuerpo">
-            <div className="campo">
-              <label>Nombre Completo</label>
-              <input
-                type="text"
-                aria-invalid={!!errors.nombre}
-                {...register('nombre', { required: 'El nombre es obligatorio' })}
-              />
-              {errors.nombre && <span className="campo__error">{errors.nombre.message}</span>}
-            </div>
+            {enviado && (
+              <p className="aviso" role="status">
+                Gracias {enviado.nombre}, recibimos tu mensaje. Te responderemos a {enviado.correo}.
+              </p>
+            )}
 
-            <div className="campo">
-              <label>Correo Electrónico</label>
-              <input
-                type="email"
-                aria-invalid={!!errors.correo}
-                {...register('correo', {
-                  required: 'El correo es obligatorio',
-                  pattern: { value: /^\S+@\S+$/i, message: 'Formato de correo inválido' }
-                })}
-              />
-              {errors.correo && <span className="campo__error">{errors.correo.message}</span>}
-            </div>
+            <FormGroup id="nombre" label="Nombre completo" error={errors.nombre?.message}>
+              <Input type="text" maxLength={100} autoComplete="name" {...register('nombre', { validate: validarNombre })} />
+            </FormGroup>
 
-            <div className="campo">
-              <label>Mensaje</label>
-              <textarea
-                aria-invalid={!!errors.mensaje}
-                {...register('mensaje', { required: 'El mensaje no puede estar vacío' })}
-              />
-              {errors.mensaje && <span className="campo__error">{errors.mensaje.message}</span>}
-            </div>
+            <FormGroup id="correo" label="Correo" ayuda={`Solo ${DOMINIOS_PERMITIDOS}.`} error={errors.correo?.message}>
+              <Input type="email" maxLength={100} autoComplete="email" {...register('correo', { validate: validarCorreo })} />
+            </FormGroup>
+
+            <FormGroup id="comentario" label="Mensaje" error={errors.comentario?.message}
+              ayuda={`${comentario.length}/${LARGO_MAXIMO_COMENTARIO} caracteres`}>
+              <Input as="textarea" maxLength={LARGO_MAXIMO_COMENTARIO} {...register('comentario', { validate: validarComentario })} />
+            </FormGroup>
           </div>
 
           <div className="formulario__pie">
-            <Button type="submit" variant="principal" className="boton--ancho">
-              Enviar Mensaje
-            </Button>
+            <Button type="submit" variant="principal" className="boton--ancho">Enviar mensaje</Button>
           </div>
         </form>
       </div>
     </main>
   );
 }
-

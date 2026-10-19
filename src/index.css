@@ -457,7 +457,7 @@ a:hover {
 }
 
 
-/* ---------- banner del home ---------- */
+
 
 .hero {
   background-color: var(--tinta);
@@ -491,9 +491,9 @@ a:hover {
 }
 
 
-/* ---------- grilla de productos ---------- */
 
-/* auto-fit para que las tarjetas se acomoden solas */
+
+
 .calugas {
   display: grid;
   gap: 16px;

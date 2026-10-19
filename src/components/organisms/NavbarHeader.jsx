@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logoCgs from '../../assets/logo-cgs.svg';
 
-export function NavbarHeader({ totalItems = 0 }) {
+export function NavbarHeader({ totalItems = 0, usuario = null, onLogout }) {
   const [menuAbierto, setMenuAbierto] = useState(false);
   const location = useLocation();
 
@@ -42,7 +42,16 @@ export function NavbarHeader({ totalItems = 0 }) {
         </ul>
 
         <div className="acciones">
-          <Link to="/login">Iniciar sesión</Link>
+          {usuario ? (
+            <>
+              {usuario.rol !== 'Cliente' && <Link to="/admin">Panel</Link>}
+              <button type="button" className="acciones__salir" onClick={onLogout}>
+                Cerrar sesión ({usuario.nombre.split(' ')[0]})
+              </button>
+            </>
+          ) : (
+            <Link to="/login">Iniciar sesión</Link>
+          )}
           <Link className="carrito-boton" to="/carrito">
             <span>Carrito</span>
             <span className="carrito-boton__conteo">{totalItems}</span>

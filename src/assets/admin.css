@@ -1,0 +1,131 @@
+/* ============================================================
+   admin.css - detalles del panel y de la sesión que no estaban en la v1.
+   Usa las mismas variables de color de index.css.
+   ============================================================ */
+
+/* Botones con aspecto de enlace (cerrar sesión) */
+.lateral__salir,
+.acciones__salir {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.acciones__salir {
+  color: var(--blanco);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.acciones__salir:hover {
+  color: var(--verde-vivo);
+}
+
+.lateral__salir {
+  color: var(--cal);
+}
+
+.lateral__salir:hover {
+  color: var(--verde-vivo);
+}
+
+.lateral__sesion a {
+  color: var(--cal);
+}
+
+/* Sin esto, la tabla ancha estira la columna y la página se sale de la pantalla en el celular */
+.panel > .trabajo {
+  min-width: 0;
+}
+
+/* Los textos .solo-lectores de los botones son position: absolute; así quedan
+   dentro de la tabla con scroll y no ensanchan la página en el celular */
+.tabla-envoltorio {
+  position: relative;
+}
+
+/* Tarjetas con números del resumen */
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.dato {
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 16px;
+  background-color: var(--blanco);
+  box-shadow: var(--sombra);
+}
+
+.dato__valor {
+  display: block;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--cancha-oscuro);
+}
+
+.dato__nombre {
+  font-size: 14px;
+  color: var(--tinta-media);
+}
+
+.criticos {
+  display: grid;
+  gap: 8px;
+  padding-left: 0;
+}
+
+.criticos li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Fila de la tabla con la confirmación de eliminar */
+.tabla__confirmar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--alerta);
+}
+
+.tabla__miniatura {
+  width: 44px;
+  min-width: 44px;
+  max-width: none;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: var(--cal);
+}
+
+/* Vista previa de la imagen en el formulario de producto */
+.vista-previa {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background-color: var(--cal);
+}
+
+.trabajo section + section {
+  margin-top: 32px;
+}
+
+.trabajo .formulario {
+  margin: 0 0 32px;
+}

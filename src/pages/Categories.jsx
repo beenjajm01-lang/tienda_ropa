@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ProductCard from '../components/molecules/ProductCard';
 
 export default function Categories({ productos, onAgregar }) {
