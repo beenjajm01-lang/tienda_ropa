@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getProductos } from './data/products';
 import { getSesion, cerrarSesion, refrescarSesion } from './data/users';
 import MainLayout from './components/templates/MainLayout';
@@ -22,7 +21,6 @@ import AdminUsers from './pages/AdminUsers';
 
 export default function App() {
   const [productos, setProductos] = useState(getProductos);
-  // Usuario conectado (null si no hay sesión)
   const [usuario, setUsuario] = useState(getSesion);
   const [carrito, setCarrito] = useState(() => {
     const guardado = localStorage.getItem('cgs_carrito');
@@ -63,20 +61,16 @@ export default function App() {
 
   const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
 
-
   const salir = () => {
     cerrarSesion();
     setUsuario(null);
   };
 
-  // El panel avisa cuando cambian los productos
   const recargarProductos = () => setProductos(getProductos());
-
-  // El panel avisa si se editó el usuario conectado
   const recargarSesion = () => setUsuario(refrescarSesion());
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Tienda: páginas con barra superior */}
         <Route element={<MainLayout totalItems={totalItems} usuario={usuario} onLogout={salir} />}>
@@ -117,7 +111,7 @@ export default function App() {
           <Route path="usuarios" element={<AdminUsers />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
