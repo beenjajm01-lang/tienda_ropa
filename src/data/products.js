@@ -1,30 +1,38 @@
 // Datos de productos y su CRUD en localStorage.
-
 import { leer, guardar, siguienteId } from './storage';
 
 const CLAVE_PRODUCTOS = "cgs_productos";
 
-// Categorías disponibles
 export const categorias = ["Camisetas", "Shorts", "Abrigo", "Accesorios"];
 
-// Imágenes disponibles en public/images
+// Función para resolver rutas estáticas en Vite tanto en local como en GitHub Pages
+export function resolverImagen(nombreArchivo) {
+  if (!nombreArchivo) return new URL('../../public/images/sin-imagen.svg', import.meta.url).href;
+  // Si trae el prefijo 'images/', se lo quitamos para buscarlo directo en public/images/
+  const limpio = nombreArchivo.replace(/^images\//, '').replace(/^\//, '');
+  try {
+    return new URL(`../../public/images/${limpio}`, import.meta.url).href;
+  } catch (e) {
+    return new URL('../../public/images/sin-imagen.svg', import.meta.url).href;
+  }
+}
+
 export const imagenesDisponibles = [
-  "/images/goku-colocolo.webp",
-  "/images/goku-udechile.webp",
-  "/images/goku-ucatolica.webp",
-  "/images/goku-cobreloa.webp",
-  "/images/krilin-wanderers.webp",
-  "/images/vegeta-uespañola.webp",
-  "/images/piccolo-palestino.webp",
-  "/images/tenshinhan-ohiggins.webp",
-  "/images/camiseta-colo-colo.webp",
-  "/images/camiseta-universidad-de-chile.webp",
-  "/images/camiseta-universidad-catolica.webp",
-  "/images/camiseta-cobreloa.webp",
+  "goku-colocolo.webp",
+  "goku-udechile.webp",
+  "goku-ucatolica.webp",
+  "goku-cobreloa.webp",
+  "krilin-wanderers.webp",
+  "vegeta-uespañola.webp",
+  "piccolo-palestino.webp",
+  "tenshinhan-ohiggins.webp",
+  "camiseta-colo-colo.webp",
+  "camiseta-universidad-de-chile.webp",
+  "camiseta-universidad-catolica.webp",
+  "camiseta-cobreloa.webp",
 ];
 
-// Imagen por defecto
-export const IMAGEN_POR_DEFECTO = "/images/sin-imagen.svg";
+export const IMAGEN_POR_DEFECTO = "sin-imagen.svg";
 
 export const productosIniciales = [
   {
@@ -37,7 +45,7 @@ export const productosIniciales = [
     stock: 24,
     stockCritico: 5,
     categoria: "Camisetas",
-    imagen: "/images/goku-colocolo.webp"
+    imagen: "goku-colocolo.webp"
   },
   {
     id: 2,
@@ -49,7 +57,7 @@ export const productosIniciales = [
     stock: 15,
     stockCritico: 5,
     categoria: "Camisetas",
-    imagen: "/images/goku-udechile.webp"
+    imagen: "goku-udechile.webp"
   },
   {
     id: 3,
@@ -61,7 +69,7 @@ export const productosIniciales = [
     stock: 18,
     stockCritico: 4,
     categoria: "Camisetas",
-    imagen: "/images/goku-ucatolica.webp"
+    imagen: "goku-ucatolica.webp"
   },
   {
     id: 4,
@@ -73,7 +81,7 @@ export const productosIniciales = [
     stock: 10,
     stockCritico: 3,
     categoria: "Camisetas",
-    imagen: "/images/goku-cobreloa.webp"
+    imagen: "goku-cobreloa.webp"
   },
   {
     id: 5,
@@ -85,7 +93,7 @@ export const productosIniciales = [
     stock: 12,
     stockCritico: 4,
     categoria: "Camisetas",
-    imagen: "/images/krilin-wanderers.webp"
+    imagen: "krilin-wanderers.webp"
   },
   {
     id: 6,
@@ -97,7 +105,7 @@ export const productosIniciales = [
     stock: 8,
     stockCritico: 2,
     categoria: "Camisetas",
-    imagen: "/images/vegeta-uespañola.webp"
+    imagen: "vegeta-uespañola.webp"
   },
   {
     id: 7,
@@ -109,7 +117,7 @@ export const productosIniciales = [
     stock: 14,
     stockCritico: 3,
     categoria: "Camisetas",
-    imagen: "/images/piccolo-palestino.webp"
+    imagen: "piccolo-palestino.webp"
   },
   {
     id: 8,
@@ -121,7 +129,7 @@ export const productosIniciales = [
     stock: 9,
     stockCritico: 3,
     categoria: "Camisetas",
-    imagen: "/images/tenshinhan-ohiggins.webp"
+    imagen: "tenshinhan-ohiggins.webp"
   }
 ];
 
@@ -202,3 +210,4 @@ export function restablecerProductos() {
 }
 
 export default getProductos();
+
