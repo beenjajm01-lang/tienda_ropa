@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Camisetas en la tienda">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12301a"/>
+      <stop offset="1" stop-color="#1f5c10"/>
+    </linearGradient>
+    <linearGradient id="camiseta" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dce8d4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="560" fill="url(#fondo)"/>
+
+  <circle cx="640" cy="120" r="150" fill="#2f7a06" opacity="0.25"/>
+  <circle cx="120" cy="470" r="180" fill="#2f7a06" opacity="0.18"/>
+
+  <g transform="translate(250 110) rotate(-6 150 170)">
+    <path d="M110,20 Q150,58 190,20 L260,52 L306,120 L252,158 L228,132 L228,330 Q150,346 72,330 L72,132 L48,158 L-6,120 L40,52 Z"
+          fill="url(#camiseta)"/>
+    <path d="M110,20 Q150,58 190,20 L190,40 Q150,76 110,40 Z" fill="#c9d9bf"/>
+    <text x="150" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="42" font-weight="800" fill="#1f5c10">CGS</text>
+  </g>
+
+  <g transform="translate(500 190) rotate(7 120 130)">
+    <path d="M90,16 Q120,46 150,16 L205,42 L242,96 L200,126 L180,105 L180,262 Q120,274 60,262 L60,105 L40,126 L-2,96 L35,42 Z"
+          fill="#e63946"/>
+    <path d="M90,16 Q120,46 150,16 L150,32 Q120,60 90,32 Z" fill="#b32330"/>
+    <rect x="60" y="150" width="120" height="34" fill="#ffffff" opacity="0.85"/>
+  </g>
+
+  <g transform="translate(120 300) rotate(4 90 100)">
+    <path d="M70,12 Q95,38 120,12 L165,34 L196,78 L160,104 L144,86 L144,214 Q95,224 46,214 L46,86 L30,104 L-6,78 L25,34 Z"
+          fill="#ffd166"/>
+    <path d="M70,12 Q95,38 120,12 L120,26 Q95,50 70,26 Z" fill="#e6b53f"/>
+  </g>
+</svg>
